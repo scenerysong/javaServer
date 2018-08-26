@@ -2,10 +2,7 @@ package VC.common;
 
 public interface MessageType {
 	//消息类型分为三类：命令CMD---数据DAT---结果RST
-	
-	//General
-	String GENERAL_BOOK = "GENERAL_BOOK";
-		
+			
 	//Command
 	String CMD_QUY_BOOK_BOOKNAME = "CMD_QUY_BOOK_BOOKNAME";
 	

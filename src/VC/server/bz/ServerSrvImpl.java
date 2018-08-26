@@ -2,19 +2,12 @@ package VC.server.bz;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import VC.common.Message;
 import VC.common.MessageType;
 import VC.common.SocketConstant;
-import VC.server.dao.LibraryDAO;
-import VC.common.Book;
-import VC.common.BookMessage;
 
 public class ServerSrvImpl {
 
@@ -32,6 +25,7 @@ public class ServerSrvImpl {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
+	//使用继承相关的类型转换方法,只需要添加MessageType的类型判断执行操作即可
 	public void run() throws IOException, ClassNotFoundException, SQLException {
 
 		while (!isClosed()) {
@@ -41,14 +35,8 @@ public class ServerSrvImpl {
 			ObjectInputStream ois = new ObjectInputStream(rsvsocket.getInputStream());
 			rcvmsg = (Message) ois.readObject();
 
-			//test
-			//System.out.println(rcvmsg.getSender());
-			//System.out.println(rcvmsg.getType());
-			
+			//对不同的MessageType进行判断,各个模块自行添加
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
-				
-				//test
-				//System.out.println("enter");
 				
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
 				librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);

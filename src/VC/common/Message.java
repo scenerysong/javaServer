@@ -2,14 +2,15 @@ package VC.common;
 
 public class Message implements java.io.Serializable{
 	
+
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6076539925058599459L;
-	
+	private static final long serialVersionUID = -3826761158384245655L;
 	private String ID;
 	private String type;
-	private String general_type;
+	//private String general_type;
 	private String sender;
 	private String receiver;
 	
@@ -38,13 +39,5 @@ public class Message implements java.io.Serializable{
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public String getGeneral_type() {
-		return general_type;
-	}
-	public void setGeneral_type(String general_type) {
-		this.general_type = general_type;
-	}
-	
-	
 
 }

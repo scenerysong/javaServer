@@ -21,6 +21,15 @@ public class DBstart {
 	public String sql;
 	public String[] paras;
 	
+	/*
+	 * 说明此处五个公有成员
+	 * sql:用于数据库执行的命令语句,*代表需要搜寻的,from(表名),?表示输入的变量
+	 * paras:储存输入变量,方法中使用paras依次替换sql语句中的?
+	 * ct:用于连接数据库的变量
+	 * ps:使用的完整SQL语句
+	 * rs:执行之后得到的结果
+	 */
+	
 	static {
 		String dbpath = new File("").getAbsolutePath().replace('\\', '/') + "/DatabaseTest.accdb";
 		// url = "jdbc:odbc:DRIVER={Microsoft Access Driver (*.mdb,

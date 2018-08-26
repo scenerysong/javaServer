@@ -16,61 +16,51 @@ public class LibraryDAO extends DBstart{
 	
 	public List<Book> getBookByBookname(String bookname) throws SQLException {
 		
+		/*
+		 * æ‰§è¡Œè¯­å¥éƒ¨åˆ†
+		 * æ­¤å¤„parasæ ¹æ®æ‰€éœ€è¦çš„æ•°é‡æ¥new
+		 * sqlæŸ¥é˜…ç›¸å…³æ–‡æ¡£å¯çŸ¥é“
+		 * åç»­æ‰§è¡Œ
+		 */
 		paras = new String[1];
 		paras[0] = bookname;
 		sql = "select * from library where bookname = ?";
 		ps = ct.prepareStatement(sql);
-		
 		for(int i=0;i<paras.length;i++)
 		{
 			ps.setString(i+1, paras[i]);
 		}
-		
-		//ps.setString(1, bookname);
 		rs = ps.executeQuery();
-		
-		String BookN = null;
-		String BookP = null;
-		String BookA = null;
+
+		/*
+		 * ç»“æœè½¬åŒ–éƒ¨åˆ†
+		 * ç»“æœå­˜åœ¨rsé‡Œ,ä½¿ç”¨ä¸‹é¢æ–¹æ³•å…¨éƒ¨ä»¥Listå–å‡º
+		 */
 		Book book = new Book();
 		List<Book> booklist = new ArrayList<Book>();
 		
-		//test
-		/*
-		if(!rs.next())
-			System.out.println("false");
-		*/
-		
 		while(rs.next()) {
-			
-			//BookN = rs.getString("bookname");
-			//BookP = rs.getString("bookpublisher");
-			//BookA = rs.getString("bookauthor");
 
 			book = new Book();
-			
 			book.setBookName(rs.getString("bookname"));
 			book.setBookAuthor(rs.getString("bookpublisher"));
 			book.setBookPublisher(rs.getString("bookauthor"));
 			
-			//test
-			//System.out.println(book.toString());
 			booklist.add(book);
 		}
-		
-		//test
-		//System.out.println(booklist.get(0).toString());
 		/*
-		 * ÕâÀïÓöµ½Ò»¸öºÜÆæ¹ÖµÄÎÊÌâ  Ò»¿ªÊ¼CountProvinceÓÃµÄÊÇÒÀÀµ×¢ÈëµÄ·½Ê½  
-		 * ²¢Ã»ÓĞÔÚÃ¿´ÎµÄÑ­»·ÖĞÊ¹ÓÃnew¶ÔÏóµÄ·½Ê½  µ«ÊÇÃ¿´ÎÑ­»·Ò²ÊÇÍ¬ÑùÉèÖÃÁË²»Í¬µÄÖµ 
-		 * µ«ÊÇºóÆÚ²âÊÔµÄÊ±ºò·¢ÏÖÑ­»·Õâ¸ölistÊ¼ÖÕÖ»ÄÜµÃµ½µÚÒ»´Î²åÈëµÄÊı¾İ ÎªÊ²Ã´ÄØ£¿
-		 * Ô­ÒòÔÚÕâÀï  ÒòÎªÒÀÀµ×¢ÈëµÄÔ­Òò 
-		 * ÄÇÃ´Ò²¾ÍÊÇÏàµ±ÓÚÎÒÃÇÖ»newÁËÒ»´Î  
-		 * ºóÃæµÄÊı¾İ¾¡¹ÜÔÚ²»Í£µÄ¸Ä±äµ«ÊÇËûÔÚÄÚ´æÖĞµÄidÎ¨Ò»  
-		 * ¶ølist.add ÊÇÒıÓÃ  ËùÒÔÒ»Ö±¶¼»á¸ù¾İidÈ¥Ñ°ÕÒ  
-		 * Ò²¾ÍÊÇµÚÒ»´Înew³öÀ´µÄÄÇ¸ö
+		 * è¿™é‡Œä¸€å¼€å§‹ç”¨çš„æ˜¯ä¾èµ–æ³¨å…¥çš„æ–¹å¼  
+		 * å¹¶æ²¡æœ‰åœ¨æ¯æ¬¡çš„å¾ªç¯ä¸­ä½¿ç”¨newå¯¹è±¡çš„æ–¹å¼  ä½†æ˜¯æ¯æ¬¡å¾ªç¯ä¹Ÿæ˜¯åŒæ ·è®¾ç½®äº†ä¸åŒçš„å€¼ 
+		 * ä½†æ˜¯åæœŸæµ‹è¯•çš„æ—¶å€™å‘ç°å¾ªç¯è¿™ä¸ªlistå§‹ç»ˆåªèƒ½å¾—åˆ°ç¬¬ä¸€æ¬¡æ’å…¥çš„æ•°æ® ä¸ºä»€ä¹ˆå‘¢ï¼Ÿ
+		 * åŸå› åœ¨è¿™é‡Œ  å› ä¸ºä¾èµ–æ³¨å…¥çš„åŸå›  
+		 * é‚£ä¹ˆä¹Ÿå°±æ˜¯ç›¸å½“äºæˆ‘ä»¬åªnewäº†ä¸€æ¬¡  
+		 * åé¢çš„æ•°æ®å°½ç®¡åœ¨ä¸åœçš„æ”¹å˜ä½†æ˜¯ä»–åœ¨å†…å­˜ä¸­çš„idå”¯ä¸€  
+		 * è€Œlist.add æ˜¯å¼•ç”¨  æ‰€ä»¥ä¸€ç›´éƒ½ä¼šæ ¹æ®idå»å¯»æ‰¾  
+		 * ä¹Ÿå°±æ˜¯ç¬¬ä¸€æ¬¡newå‡ºæ¥çš„é‚£ä¸ª
+		 * ç±»ä¼¼çš„,å§‹ç»ˆå¾—åˆ°æœ€åä¸€æ¬¡çš„æ•°æ®çš„åŸå› æ˜¯
+		 * å®ƒæŒ‡å‘çš„æ˜¯é‚£ä¸ªæŒ‡é’ˆ,ç„¶åæˆ‘ä»¬æ”¹å˜äº†çš„æ˜¯å†…å®¹çš„å€¼
+		 * æŒ‡é’ˆæ²¡æœ‰å˜åŒ–,æ‰€ä»¥çœ‹èµ·æ¥æŒ‡å‘ä¸åŒçš„å€¼,å…¶å®ç”¨çš„æ˜¯ä¸€æ ¹æŒ‡é’ˆ
 		 */
 		return booklist;
-		
 	}
 }
