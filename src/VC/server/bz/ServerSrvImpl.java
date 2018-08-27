@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import VC.common.Message;
 import VC.common.MessageType;
 import VC.common.SocketConstant;
+import VC.server.vo.ServerSrv;
 
-public class ServerSrvImpl {
+public class ServerSrvImpl implements ServerSrv{
 
 	private ServerSocket serversocket = null;
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;

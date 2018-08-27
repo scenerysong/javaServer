@@ -11,8 +11,9 @@ import VC.common.Book;
 import VC.common.BookMessage;
 import VC.common.Message;
 import VC.server.dao.LibraryDAO;
+import VC.server.vo.LibrarySrv;
 
-public class LibrarySrvImpl{
+public class LibrarySrvImpl implements LibrarySrv{
 
 	public LibrarySrvImpl() {
 		
