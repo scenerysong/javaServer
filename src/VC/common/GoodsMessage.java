@@ -4,6 +4,7 @@ public class GoodsMessage extends Message{
 	
 	/**
 	 * 
+	 * test
 	 */
 	private static final long serialVersionUID = -5787400267788454272L;
 	private String productName;
