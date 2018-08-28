@@ -2,7 +2,7 @@ package VC.common;
 
 public class Course implements java.io.Serializable{
 	/**
-	 * 
+	 * 点多
 	 */
 	private static final long serialVersionUID = -8251698032892536679L;
 	private String courseName;
