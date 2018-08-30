@@ -44,6 +44,20 @@ public class ServerSrvImpl implements ServerSrv{
 				
 				closed = true;
 			}
+			if(rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)){
+				
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				loginsrv.judgeLogin(rcvmsg, rsvsocket);
+				
+				closed = true;
+			}
+			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)){
+				
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				shopsrv.getAllGoods(rcvmsg, rsvsocket);
+				
+				closed = true;
+			}
 		}
 	}
 

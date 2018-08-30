@@ -2,6 +2,10 @@ package VC.common;
 
 public class Goods implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6836144424744782242L;
 	private String productName;
 	private String value;
 	private String goodsID;
