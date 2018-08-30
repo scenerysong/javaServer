@@ -1,15 +1,20 @@
 package VC.common;
 
+import java.util.List;
+
 public class GoodsMessage extends Message{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5787400267788454272L;
+	private static final long serialVersionUID = 4636492175363052477L;
 	private String productName;
 	private String value;
 	private String goodsID;
 	private String goodsNum;
+	
+	private List<Goods> Goodslist;
+	
 	
 	public GoodsMessage(){
 		
@@ -38,6 +43,14 @@ public class GoodsMessage extends Message{
 	}
 	public void setGoodsNum(String goodsNum) {
 		this.goodsNum = goodsNum;
+	}
+
+	public List<Goods> getGoodslist() {
+		return Goodslist;
+	}
+
+	public void setGoodslist(List<Goods> goodslist) {
+		Goodslist = goodslist;
 	}
 
 }
