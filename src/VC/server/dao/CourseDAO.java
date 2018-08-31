@@ -35,6 +35,7 @@ public class CourseDAO extends DBstart{
 		return Course;
 	}
 	
+	// add the courses for the users
 	public boolean AddCourse(String Users, String coursename) throws SQLException {
 		sql = "selct * from course where coursename = ?";
 		ps = ct.prepareStatement(sql);
@@ -60,6 +61,8 @@ public class CourseDAO extends DBstart{
 		else return false;
 	}
 	
+	
+	// return all the courses the user has chose.
 	public List<Course> GetAllMyCourse(String Users) throws SQLException {
 		sql = "select * from CourseUser where User = ?";
 		ps = ct.prepareStatement(sql);

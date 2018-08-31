@@ -7,10 +7,10 @@ public class Book implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = -2241529224304883586L;
 
+	
+	private String bookID;
 	private String bookName;
-	
 	private String bookAuthor;
-	
 	private String bookPublisher;
 
 	public Book() {
@@ -50,6 +50,14 @@ public class Book implements java.io.Serializable{
 	public String toString() {
 		return "Book [bookName=" + bookName + ", bookAuthor=" + bookAuthor
 				 + ", bookPublisher=" + bookPublisher ;
+	}
+
+	public String getBookID() {
+		return bookID;
+	}
+
+	public void setBookID(String bookID) {
+		this.bookID = bookID;
 	}
 	
 }
