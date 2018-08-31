@@ -58,6 +58,13 @@ public class ServerSrvImpl implements ServerSrv{
 				
 				closed = true;
 			}
+			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
+				
+				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				coursesrv.getAllCourse(rcvmsg, rsvsocket);
+				
+				closed = true;
+			}
 		}
 	}
 
