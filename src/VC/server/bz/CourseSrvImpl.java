@@ -45,18 +45,18 @@ public class CourseSrvImpl {
 		oos.writeObject(sendmsg);
 		oos.flush();
 	}
-
-	public void addCourse(Message rcvmsg, Socket socket) {
+;
+	public void addCourse(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		CourseMessage sendmsg = new CourseMessage();
 		String coursename = null;
-		String teacher = null;
+		String username = null;
 		boolean res = false;
 		CourseMessage rmsg = (CourseMessage) rcvmsg;
 		coursename = rmsg.courseName();
-		teacher = rmsg.courseTeacher();
+		username = rmsg.getID();
 		
-		res = coursedao.addCourse(coursename, teacher);
+		res = coursedao.AddCourse(username, coursename);
 
 		sendmsg.setRes(res);
 
@@ -94,7 +94,7 @@ public class CourseSrvImpl {
 		coursename = rmsg.courseName();
 		teacher = rmsg.courseTeacher();
 		
-		res = coursedao.addCourse(coursename, teacher);
+		res = coursedao.delCourse(coursename, teacher);
 
 		sendmsg.setRes(res);
 

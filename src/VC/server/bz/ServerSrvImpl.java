@@ -65,6 +65,13 @@ public class ServerSrvImpl implements ServerSrv{
 				
 				//closed = true;
 			}
+			if(rcvmsg.getType().equals(MessageType.CMD_ADD_COURSE)) {
+				
+				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				coursesrv.addCourse(rcvmsg, rsvsocket);
+				
+				//closed = true;
+			}
 		}
 	}
 
