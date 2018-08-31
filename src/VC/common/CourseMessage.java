@@ -1,5 +1,7 @@
 package VC.common;
 
+import java.util.List;
+
 public class CourseMessage  extends Message{
 	/**
 	 * 
@@ -13,6 +15,8 @@ public class CourseMessage  extends Message{
 	private String courseNum;
 	private String courseTeacher;
 	
+	private Course course;
+	private List<Course> courselist;
     public CourseMessage(){
 		
 	}
@@ -58,6 +62,22 @@ public class CourseMessage  extends Message{
 	}
 	public void setCourseNum(String courseNum) {
 		this.courseNum = courseNum;
+	}
+
+	public List<Course> getCourselist() {
+		return courselist;
+	}
+
+	public void setCourselist(List<Course> courselist) {
+		this.courselist = courselist;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 }
