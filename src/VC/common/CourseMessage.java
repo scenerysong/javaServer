@@ -3,10 +3,11 @@ package VC.common;
 import java.util.List;
 
 public class CourseMessage  extends Message{
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4338384697590639870L;
+	private static final long serialVersionUID = 6332136403559711472L;
 	private String courseName;
 	private String score;
 	private String courseTime;
