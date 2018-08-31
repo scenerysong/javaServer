@@ -42,28 +42,28 @@ public class ServerSrvImpl implements ServerSrv{
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
 				librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);
 				
-				closed = true;
+				//closed = true;
 			}
 			if(rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)){
 				
 				LoginSrvImpl loginsrv = new LoginSrvImpl();
 				loginsrv.judgeLogin(rcvmsg, rsvsocket);
 				
-				closed = true;
+				//closed = true;
 			}
 			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)){
 				
 				ShopSrvImpl shopsrv = new ShopSrvImpl();
 				shopsrv.getAllGoods(rcvmsg, rsvsocket);
 				
-				closed = true;
+				//closed = true;
 			}
 			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 				
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
 				coursesrv.getAllCourse(rcvmsg, rsvsocket);
 				
-				closed = true;
+				//closed = true;
 			}
 		}
 	}
