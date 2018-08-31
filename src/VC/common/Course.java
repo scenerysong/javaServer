@@ -12,6 +12,7 @@ public class Course implements java.io.Serializable{
 	private String courseRoom;
 	private String courseNum;
 	private String courseTeacher;
+	private String Credit;
 	
     public Course() {
 		
@@ -69,11 +70,21 @@ public class Course implements java.io.Serializable{
 	public void setCourseTeacher(String courseTeacher) {
 		this.courseTeacher = courseTeacher;
 	}
+	
 	public String toString() {
 		return "Course [courseName=" + courseName + ", courseID=" + courseID
 				 + ", score=" + score+ ", courseTime=" + courseTime
 				 + ", courseRoom=" + courseRoom+", courseNum=" + courseNum
 				 + ", courseTeacher=" + courseTeacher;
 	}
+
+	public String getCredit() {
+		return Credit;
+	}
+
+	public void setCredit(String credit) {
+		Credit = credit;
+	}
+
 	
 }

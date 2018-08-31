@@ -11,6 +11,7 @@ public interface MessageType {
 	String CMD_JUDGE_LOGIN = "CMD_JUDGE_LOGIN";
 	String CMD_GET_ALL_GOODS = "CMD_GET_ALL_GOODS";
 	String CMD_GET_ALL_COURSE = "CMD_GET_ALL_COURSE";
+	String CMD_ADD_COURSE = "CMD_ADD_COURSE";
 	
 	
 	//Data
