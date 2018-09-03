@@ -98,13 +98,16 @@ public class ShopDAO extends DBstart {
 			return false;
 	}
 
-	/*
-	 * //**We need to add the modification for the rest of the goods and the money
-	 * of users. public boolean payforgoodincart(String Users, String goodname,
-	 * String goodnumber) throws SQLException { if(deletegoodfromcart(Users,
-	 * goodname) == false) return false; if(payforgood(Users, goodname, goodnumber)
-	 * == false) return false; return true; }
-	 */
+	// **We need to add the modification for the rest of the goods and the money of
+	// users.
+	public boolean payforgoodincart(String Users, String goodname, String goodnumber) throws SQLException {
+		if (deletegoodfromcart(Users, goodname) == false)
+			return false;
+		if (payforgood(Users, goodname, goodnumber) == false)
+			return false;
+		return true;
+	}
+
 	public Goods getgoodBygoodname(String goodname) throws SQLException {
 		sql = "select * from goods where goodname = ?";
 		ps = ct.prepareStatement(sql);
@@ -121,16 +124,48 @@ public class ShopDAO extends DBstart {
 		}
 		return gd;
 	}
-	/*
-	 * public boolean payforgood(String Users, String goodname, String goodnumber)
-	 * throws SQLException { sql = "select from login where usrname = ?"; ps =
-	 * ct.prepareStatement(sql); ps.setString(1, Users); rs = ps.executeQuery();
-	 * 
-	 * if(rs.next()) { String balance = rs.getString("balance"); int onecost =
-	 * Integer.valueOf(getgoodBygoodname(goodname).getValue()).intValue(); int money
-	 * = Integer.valueOf(balance).intValue(); int number =
-	 * Integer.valueOf(goodnumber).intValue(); money -= number * onecost; return }
-	 * 
-	 * if(ps.executeUpdate() > 0) { sql = "" return true; } else return false; }
-	 */
+
+	public boolean payforgood(String Users, String goodname, String goodnumber) throws SQLException {
+		sql = "select from login where usrname = ?";
+		ps = ct.prepareStatement(sql);
+		ps.setString(1, Users);
+		rs = ps.executeQuery();
+
+		if (rs.next()) {
+			String balance = rs.getString("balance");
+			int onecost = Integer.valueOf(getgoodBygoodname(goodname).getValue()).intValue();
+			int money = Integer.valueOf(balance).intValue();
+			int number = Integer.valueOf(goodnumber).intValue();
+			money -= number * onecost;
+			if (money < 0)
+				return false;
+
+			sql = "update login set balance = ? where usrname = ?";
+			ps = ct.prepareStatement(sql);
+			ps.setString(2, Users);
+			ps.setString(1, String.valueOf(money));
+			if (ps.executeUpdate() > 0)
+				return false;
+
+			sql = "select from statistic where key = ?";
+			ps = ct.prepareStatement(sql);
+			ps.setString(1, "income");
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				String income = rs.getString("value");
+				int incomenum = Integer.valueOf(income).intValue() + number * onecost;
+				sql = "update statistic set value = ? where key = ?";
+				ps = ct.prepareStatement(sql);
+				ps.setString(1, String.valueOf(incomenum));
+				ps.setString(2, "income");
+				if (ps.executeUpdate() > 0)
+					return true;
+				else
+					return false;
+			} else
+				return false;
+		} else
+			return false;
+	}
 }
