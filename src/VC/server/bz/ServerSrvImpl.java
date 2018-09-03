@@ -34,11 +34,11 @@ public class ServerSrvImpl implements ServerSrv {
 			i++;
 			System.out.println(i);
 			Socket rsvsocket = serversocket.accept();
-
+			System.out.println(rsvsocket.getPort());
 			Message rcvmsg = new Message();
 			ObjectInputStream ois = new ObjectInputStream(rsvsocket.getInputStream());
 			rcvmsg = (Message) ois.readObject();
-
+			System.out.println(rcvmsg.getType());
 			// 对不同的MessageType进行判断,各个模块自行添加
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
@@ -77,7 +77,6 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
 
-				System.out.println("kai shi tui ke");
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
 				coursesrv.delMyCourse(rcvmsg, rsvsocket);
 
@@ -87,6 +86,34 @@ public class ServerSrvImpl implements ServerSrv {
 
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
 				coursesrv.getMyCourse(rcvmsg, rsvsocket);
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_BOOK)) {
+
+				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
+				librarysrv.getAllBook(rcvmsg, rsvsocket);
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_BOOK)) {
+
+				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
+				librarysrv.borrowbook(rcvmsg, rsvsocket);
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_BOOK)) {
+
+				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
+				librarysrv.returnbook(rcvmsg, rsvsocket);
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYBOOK)) {
+
+				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
+				librarysrv.getMyBook(rcvmsg, rsvsocket);
 
 				// closed = true;
 			}

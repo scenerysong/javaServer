@@ -36,7 +36,7 @@ public class CourseDAO extends DBstart{
 	}
 	
 	public boolean AddCourse(String Users, String coursename) throws SQLException {
-		sql = "selct * from course where coursename = ?";
+		sql = "select * from course where coursename = ?";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, coursename);
 		rs = ps.executeQuery();
@@ -44,20 +44,22 @@ public class CourseDAO extends DBstart{
 		/* ；课程名称默认不重复*/
 		Course crs = new Course();
 		if(rs.next()) {
+			System.out.println(rs.getString("coursename"));
 			crs.setCourseID(rs.getString("ID"));
 			crs.setCourseName(rs.getString("coursename"));
 			crs.setCourseTeacher(rs.getString("teacher"));
-			sql = "insert into CourseUser values (?, ?, ?, ?, ?)";
+			crs.setCredit(rs.getString("Credit"));
+			sql = "insert into CourseUser (User, CourseName, Teacher, Credit) values (?, ?, ?, ?) ";
 			ps = ct.prepareStatement(sql);
-			ps.setString(1, crs.getCourseID());
-			ps.setString(2, Users);
-			ps.setString(3, crs.getCourseName());
-			ps.setString(4, crs.getCourseTeacher());
-			ps.setString(5, crs.getCredit());
-			if(ps.executeUpdate() > 0) return true;
-			else return false;
+			//ps.setString(1, "6");
+			ps.setString(1, Users);
+			ps.setString(2, crs.getCourseName());
+			ps.setString(3, crs.getCourseTeacher());
+			ps.setString(4, crs.getCredit());
+			//ps.executeUpdate();
+			ps.execute();
 		}
-		else return false;
+		return true;
 	}
 	
 	public List<Course> GetAllMyCourse(String Users) throws SQLException {

@@ -9,6 +9,7 @@ import java.util.List;
 
 import VC.common.Book;
 import VC.common.BookMessage;
+import VC.common.CourseMessage;
 import VC.common.Book;
 import VC.common.BookMessage;
 import VC.common.Message;
@@ -45,7 +46,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		// 调用dao里的方法
 		booklist = librarydao.getBookByBookname(bookmsg.getBookname());
 
-		sendmsg.setBookdata(booklist);
+		sendmsg.setBooklist(booklist);
 
 		// 发送消息部分
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -62,9 +63,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		// 调用dao里的方法
 		Booklist = librarydao.getAllBook();
 
-		// test
-		System.out.println(Booklist.get(1).toString());
-		sendmsg.setBookdata(Booklist);
+		sendmsg.setBooklist(Booklist);
 
 		// 发送消息部分
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -79,13 +78,50 @@ public class LibrarySrvImpl implements LibrarySrv {
 		String username = rcvmsg.getID();
 
 		// 调用dao里的方法
-		Booklist = librarydao.getMyBook();
+		Booklist = librarydao.GetAllMyBook(username);
 
-		// test
-		System.out.println(Booklist.get(1).toString());
-		sendmsg.setBookdata(Booklist);
+		sendmsg.setBooklist(Booklist);
 
 		// 发送消息部分
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(sendmsg);
+		oos.flush();
+	}
+	
+	public void borrowbook(Message rcvmsg, Socket socket) throws SQLException, IOException {
+
+		BookMessage sendmsg = new BookMessage();
+		String bookname = null;
+		String username = null;
+		boolean res = false;
+		BookMessage rmsg = (BookMessage) rcvmsg;
+		bookname = rmsg.getBookname();
+		username = rmsg.getID();
+		
+		res = librarydao.BorrowBook(username, bookname);
+
+		sendmsg.setRes(res);
+
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(sendmsg);
+		oos.flush();
+	}
+	
+	public void returnbook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
+		
+		BookMessage sendmsg = new BookMessage();
+		String Bookname = null;
+		String username = null;
+		boolean res = false;
+		BookMessage rmsg = (BookMessage) rcvmsg;
+		Bookname = rmsg.getBookname();
+		username = rmsg.getID();
+		
+		System.out.println("kai shi tui ke step2");
+		res = librarydao.returnbook(username, Bookname);
+
+		sendmsg.setRes(res);
+
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(sendmsg);
 		oos.flush();

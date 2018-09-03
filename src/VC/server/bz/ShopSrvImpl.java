@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import VC.common.CourseMessage;
 import VC.common.Goods;
 import VC.common.GoodsMessage;
 import VC.common.Message;
@@ -55,7 +56,7 @@ public class ShopSrvImpl {
 		String username = rcvmsg.getID();
 
 		// 调用dao里的方法
-		Goodslist = shopdao.getAllGoods();
+		Goodslist = shopdao.GetMyshoppingcart(username);
 
 		// test
 		System.out.println(Goodslist.get(1).toString());
@@ -66,4 +67,69 @@ public class ShopSrvImpl {
 		oos.writeObject(sendmsg);
 		oos.flush();
 	}
+	
+	public void addshoppingcart(Message rcvmsg, Socket socket) throws SQLException, IOException {
+
+		GoodsMessage sendmsg = new GoodsMessage();
+		String goodname = null;
+		String username = null;
+		String number = null;
+		
+		boolean res = false;
+		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
+		goodname = rmsg.getProductName();
+		username = rmsg.getID();
+		number = rmsg.getGoodsNum();
+		
+		res = shopdao.addtoshoppingcart(username, goodname, number);
+
+		sendmsg.setRes(res);
+
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(sendmsg);
+		oos.flush();
+	}
+	
+public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
+		
+		GoodsMessage sendmsg = new GoodsMessage();
+		String goodname = null;
+		String username = null;
+		boolean res = false;
+		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
+		goodname = rmsg.getProductName();
+		username = rmsg.getID();
+		
+		System.out.println("kai shi tui ke step2");
+		res = shopdao.deletegoodfromcart(username, goodname);
+
+		sendmsg.setRes(res);
+
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(sendmsg);
+		oos.flush();
+	}
+	
+public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
+	
+	GoodsMessage sendmsg = new GoodsMessage();
+	String goodname = null;
+	String username = null;
+	String goodnumber = null;
+	boolean res = false;
+	GoodsMessage rmsg = (GoodsMessage) rcvmsg;
+	goodname = rmsg.getProductName();
+	goodnumber = rmsg.getGoodsNum();
+	username = rmsg.getID();
+	
+	System.out.println("kai shi tui ke step2");
+	res = shopdao.payforgoodincart(username, goodname, goodnumber);
+	
+
+	sendmsg.setRes(res);
+
+	ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+	oos.writeObject(sendmsg);
+	oos.flush();
+}
 }

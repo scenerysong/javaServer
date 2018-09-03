@@ -5,15 +5,16 @@ import java.util.List;
 public class BookMessage extends Message{
 
 	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1428457839957205171L;
+	private static final long serialVersionUID = 3978440929024014494L;
 	private String bookname;
 	private String bookauthor;
 	private Book book;
 	
-	private List<Book> bookdata;
+	private List<Book> booklist;
 	
 	public BookMessage(){
 		
@@ -40,14 +41,13 @@ public class BookMessage extends Message{
 		this.bookauthor = bookauthor;
 	}
 
-
-	public List<Book> getBookdata() {
-		return bookdata;
+	public List<Book> getBooklist() {
+		return booklist;
 	}
 
-	public void setBookdata(List<Book> bookdata) {
-		this.bookdata = bookdata;
+	public void setBooklist(List<Book> booklist) {
+		this.booklist = booklist;
 	}
-	
-	
+
+
 }
