@@ -10,7 +10,7 @@ import VC.common.MessageType;
 import VC.common.SocketConstant;
 import VC.server.vo.ServerSrv;
 
-public class ServerSrvImpl implements ServerSrv{
+public class ServerSrvImpl implements ServerSrv {
 
 	private ServerSocket serversocket = null;
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;
@@ -26,55 +26,72 @@ public class ServerSrvImpl implements ServerSrv{
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
-	//使用继承相关的类型转换方法,只需要添加MessageType的类型判断执行操作即可
+	// 使用继承相关的类型转换方法,只需要添加MessageType的类型判断执行操作即可
 	public void run() throws IOException, ClassNotFoundException, SQLException {
 
+		int i = 0;
 		while (!isClosed()) {
+			i++;
+			System.out.println(i);
 			Socket rsvsocket = serversocket.accept();
 
 			Message rcvmsg = new Message();
 			ObjectInputStream ois = new ObjectInputStream(rsvsocket.getInputStream());
 			rcvmsg = (Message) ois.readObject();
 
-			//对不同的MessageType进行判断,各个模块自行添加
+			// 对不同的MessageType进行判断,各个模块自行添加
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
-				
+
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
 				librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);
-				
-				//closed = true;
+
+				// closed = true;
 			}
-			if(rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)){
-				
+			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
+
 				LoginSrvImpl loginsrv = new LoginSrvImpl();
 				loginsrv.judgeLogin(rcvmsg, rsvsocket);
-				
-				//closed = true;
+
+				// closed = true;
 			}
-			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)){
-				
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
+
 				ShopSrvImpl shopsrv = new ShopSrvImpl();
 				shopsrv.getAllGoods(rcvmsg, rsvsocket);
-				
-				//closed = true;
+
+				// closed = true;
 			}
-			if(rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
-				
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
+
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
 				coursesrv.getAllCourse(rcvmsg, rsvsocket);
-				
-				//closed = true;
+
+				// closed = true;
 			}
-			if(rcvmsg.getType().equals(MessageType.CMD_ADD_COURSE)) {
-				
+			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_COURSE)) {
+
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
 				coursesrv.addCourse(rcvmsg, rsvsocket);
-				
-				//closed = true;
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
+
+				System.out.println("kai shi tui ke");
+				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				coursesrv.delMyCourse(rcvmsg, rsvsocket);
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYCOURSE)) {
+
+				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				coursesrv.getMyCourse(rcvmsg, rsvsocket);
+
+				// closed = true;
 			}
 		}
 	}
-
 
 	public ServerSocket getServersocket() {
 		return serversocket;

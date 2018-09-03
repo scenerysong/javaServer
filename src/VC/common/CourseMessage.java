@@ -7,7 +7,7 @@ public class CourseMessage  extends Message{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6332136403559711472L;
+	private static final long serialVersionUID = -3803474184360625783L;
 	private String courseName;
 	private String score;
 	private String courseTime;
@@ -68,11 +68,15 @@ public class CourseMessage  extends Message{
 	public List<Course> getCourselist() {
 		return courselist;
 	}
+	
+	public List<Course> getMyCourselist() {
+		return courselist;
+	}
 
 	public void setCourselist(List<Course> courselist) {
 		this.courselist = courselist;
 	}
-
+	
 	public Course getCourse() {
 		return course;
 	}

@@ -1,10 +1,11 @@
 package VC.common;
 
 public class Course implements java.io.Serializable{
+	
 	/**
-	 * 点多
+	 * 
 	 */
-	private static final long serialVersionUID = -8251698032892536679L;
+	private static final long serialVersionUID = -8273011997173165320L;
 	private String courseName;
 	private String score;
 	private String courseTime;

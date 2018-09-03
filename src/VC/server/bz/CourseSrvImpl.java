@@ -37,7 +37,6 @@ public class CourseSrvImpl {
 		Courselist = coursedao.getAllCourse();
 
 		// test
-		System.out.println(Courselist.get(1).toString());
 		sendmsg.setCourselist(Courselist);
 
 		// 发送消息部分
@@ -72,10 +71,9 @@ public class CourseSrvImpl {
 		String username = rcvmsg.getID();
 
 		// 调用dao里的方法
-		Courselist = coursedao.getMyCourse(username);
+		Courselist = coursedao.GetAllMyCourse(username);
 
 		// test
-		System.out.println(Courselist.get(1).toString());
 		sendmsg.setCourselist(Courselist);
 
 		// 发送消息部分
@@ -88,13 +86,14 @@ public class CourseSrvImpl {
 		
 		CourseMessage sendmsg = new CourseMessage();
 		String coursename = null;
-		String teacher = null;
+		String username = null;
 		boolean res = false;
 		CourseMessage rmsg = (CourseMessage) rcvmsg;
 		coursename = rmsg.courseName();
-		teacher = rmsg.courseTeacher();
+		username = rmsg.getID();
 		
-		res = coursedao.delCourse(coursename, teacher);
+		System.out.println("kai shi tui ke step2");
+		res = coursedao.DelCourse(username, coursename);
 
 		sendmsg.setRes(res);
 

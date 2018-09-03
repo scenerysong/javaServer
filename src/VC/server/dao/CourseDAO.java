@@ -70,8 +70,8 @@ public class CourseDAO extends DBstart{
 		List<Course> Crs = new ArrayList<Course>();
 		
 		while(rs.next()) {
-			crs.setCourseName(rs.getString("ID"));
-			crs.setCourseID(rs.getString("CourseName"));
+			crs.setCourseName(rs.getString("CourseName"));
+			//crs.setCourseID(rs.getString("ID"));
 			crs.setCourseTeacher(rs.getString("Teacher"));
 			crs.setCredit(rs.getString("Credit"));
 			
@@ -83,6 +83,7 @@ public class CourseDAO extends DBstart{
 	
 	//delete the record of ChoosedCourse
 	public boolean DelCourse(String Users, String coursename) throws SQLException {
+		System.out.println("kai shi tui ke step3");
 		sql = "delete from CourseUser where User = ? and CourseName = ?";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, Users);

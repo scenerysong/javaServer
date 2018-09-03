@@ -11,7 +11,6 @@ public interface MessageType {
 	String CMD_JUDGE_LOGIN = "CMD_JUDGE_LOGIN";
 	String CMD_GET_ALL_GOODS = "CMD_GET_ALL_GOODS";
 	String CMD_GET_ALL_COURSE = "CMD_GET_ALL_COURSE";
-	String CMD_ADD_COURSE = "CMD_ADD_COURSE";
 	
 	
 	//Data
@@ -20,5 +19,10 @@ public interface MessageType {
 	//Result
 	String RST_SUCCESS = "RST_SUCCESS";
 	String RST_FAILURE = "RST_FAILURE";
+	
+	//COURSE
+	String CMD_ADD_ALL_COURSE="CMD_ADD_ALL_COURSE";
+	String CMD_DELETE_ALL_COURSE="CMD_DELETE_ALL_COURSE";
+	String CMD_GET_ALL_MYCOURSE = "CMD_GET_ALL_MYCOURSE";
 	
 }
