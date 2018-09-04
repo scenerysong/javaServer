@@ -30,4 +30,11 @@ public class StuSrvImpl implements StuSrv{
 		
 	}
 	
+	public void getInfo(Message rcvmsg, Socket socket) {
+		
+	}
+	
+	public void updateInfo(Message rcvmsg, Socket socket) {
+		
+	}
 }
