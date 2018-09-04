@@ -39,8 +39,6 @@ public class ShopSrvImpl {
 		// 调用dao里的方法
 		Goodslist = shopdao.getAllGoods();
 
-		// test
-		System.out.println(Goodslist.get(1).toString());
 		sendmsg.setGoodslist(Goodslist);
 
 		// 发送消息部分
@@ -58,8 +56,6 @@ public class ShopSrvImpl {
 		// 调用dao里的方法
 		Goodslist = shopdao.GetMyshoppingcart(username);
 
-		// test
-		System.out.println(Goodslist.get(1).toString());
 		sendmsg.setGoodslist(Goodslist);
 
 		// 发送消息部分

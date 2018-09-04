@@ -2,16 +2,21 @@ package VC.common;
 
 public class Book implements java.io.Serializable{
 	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2241529224304883586L;
 
+	private String bookID;
+	
 	private String bookName;
 	
 	private String bookAuthor;
 	
 	private String bookPublisher;
+	
+	private String bookNum;
 
 	public Book() {
 		
@@ -21,6 +26,22 @@ public class Book implements java.io.Serializable{
 		this.setBookAuthor(book.getBookAuthor());
 		this.setBookName(book.getBookName());
 		this.setBookPublisher(book.getBookPublisher());
+		this.setBookID(book.getBookID());
+	}
+	public String getBookNum() {
+		return bookNum;
+	}
+	
+	public void  setBookNum(String bookNum) {
+		this.bookNum=bookNum;
+	}
+	
+	public String getBookID() {
+		return bookID;
+	}
+	
+	public void  setBookID(String bookID) {
+		this.bookID=bookID;
 	}
 	
 	public String getBookName() {

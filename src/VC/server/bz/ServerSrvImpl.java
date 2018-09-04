@@ -26,94 +26,205 @@ public class ServerSrvImpl implements ServerSrv {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
-	// 使用继承相关的类型转换方法,只需要添加MessageType的类型判断执行操作即可
-	public void run() throws IOException, ClassNotFoundException, SQLException {
+	public void run() {
 
 		int i = 0;
+		
 		while (!isClosed()) {
 			i++;
 			System.out.println(i);
-			Socket rsvsocket = serversocket.accept();
+			Socket rsvsocket = null;
+			try {
+				rsvsocket = serversocket.accept();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			System.out.println(rsvsocket.getPort());
 			Message rcvmsg = new Message();
-			ObjectInputStream ois = new ObjectInputStream(rsvsocket.getInputStream());
-			rcvmsg = (Message) ois.readObject();
+			ObjectInputStream ois = null;
+			try {
+				ois = new ObjectInputStream(rsvsocket.getInputStream());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				rcvmsg = (Message) ois.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println(rcvmsg.getType());
-			// 对不同的MessageType进行判断,各个模块自行添加
+			
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
-				librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);
+				try {
+					librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
 				LoginSrvImpl loginsrv = new LoginSrvImpl();
-				loginsrv.judgeLogin(rcvmsg, rsvsocket);
-
-				// closed = true;
-			}
-			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
-
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
-				shopsrv.getAllGoods(rcvmsg, rsvsocket);
+				try {
+					loginsrv.judgeLogin(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
-				coursesrv.getAllCourse(rcvmsg, rsvsocket);
+				try {
+					coursesrv.getAllCourse(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_COURSE)) {
 
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
-				coursesrv.addCourse(rcvmsg, rsvsocket);
+				try {
+					coursesrv.addCourse(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
 
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
-				coursesrv.delMyCourse(rcvmsg, rsvsocket);
+				try {
+					coursesrv.delMyCourse(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYCOURSE)) {
 
 				CourseSrvImpl coursesrv = new CourseSrvImpl();
-				coursesrv.getMyCourse(rcvmsg, rsvsocket);
+				try {
+					coursesrv.getMyCourse(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_BOOK)) {
 
 				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
-				librarysrv.getAllBook(rcvmsg, rsvsocket);
+				try {
+					librarysrv.getAllBook(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_BOOK)) {
 
 				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
-				librarysrv.borrowbook(rcvmsg, rsvsocket);
+				try {
+					librarysrv.borrowbook(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_BOOK)) {
 
 				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
-				librarysrv.returnbook(rcvmsg, rsvsocket);
+				try {
+					librarysrv.returnbook(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYBOOK)) {
 
 				LibrarySrvImpl librarysrv = new LibrarySrvImpl();
-				librarysrv.getMyBook(rcvmsg, rsvsocket);
+				try {
+					librarysrv.getMyBook(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.getAllGoods(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYGOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.getMyGoods(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.addshoppingcart(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.delMygood(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				// closed = true;
 			}

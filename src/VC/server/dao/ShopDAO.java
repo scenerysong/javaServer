@@ -46,11 +46,10 @@ public class ShopDAO extends DBstart {
 		ps.setString(1, goodname);
 		rs = ps.executeQuery();
 
-		Goods gd = new Goods();
 		if (rs.next()) {
 			sql = "insert into BorrowedBook values (?, ?, ?, ?, ?)";
 			ps = ct.prepareStatement(sql);
-			ps.setString(1, rs.getString("ID"));
+			ps.setString(1, rs.getString("goodid"));
 			ps.setString(2, User);
 			ps.setString(3, rs.getString("goodname"));
 			ps.setString(4, rs.getString("goodvalue"));
@@ -76,8 +75,8 @@ public class ShopDAO extends DBstart {
 		while (rs.next()) {
 			Gd = new Goods();
 
-			Gd.setGoodsID(rs.getString("ID"));
-			Gd.setGoodsNum(rs.getString("number"));
+			Gd.setGoodsID(rs.getString("goodid"));
+			Gd.setGoodsNum(rs.getString("goodnumber"));
 			Gd.setProductName(rs.getString("goodname"));
 			Gd.setValue("goodvalue");
 
@@ -116,7 +115,7 @@ public class ShopDAO extends DBstart {
 
 		Goods gd = new Goods();
 		if (rs.next()) {
-			gd.setGoodsID(rs.getString("ID"));
+			gd.setGoodsID(rs.getString("goodid"));
 			gd.setGoodsNum(rs.getString("goodnumber"));
 			gd.setProductName(rs.getString("goodname"));
 			gd.setValue(rs.getString("goodvalue"));

@@ -9,9 +9,6 @@ import java.util.List;
 
 import VC.common.Book;
 import VC.common.BookMessage;
-import VC.common.CourseMessage;
-import VC.common.Book;
-import VC.common.BookMessage;
 import VC.common.Message;
 import VC.server.dao.LibraryDAO;
 import VC.server.vo.LibrarySrv;
