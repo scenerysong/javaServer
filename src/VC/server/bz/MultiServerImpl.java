@@ -64,6 +64,21 @@ public class MultiServerImpl implements ServerSrv {
 			
 			System.out.println(rcvmsg.getType());
 			
+			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
+
+				boolean flag = false;
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				
+				try {
+					flag = loginsrv.judgeLogin(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
+			
 			ServerThread st = new ServerThread(rsvsocket, rcvmsg.getID());
 			new Thread(st).start();
 		}
