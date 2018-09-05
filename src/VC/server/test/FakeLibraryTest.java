@@ -11,6 +11,8 @@ public class FakeLibraryTest {
 	public static void main(String[] args) throws ClassNotFoundException, IOException, SQLException {
 		
 		MultiServerImpl serversrvimpl = new MultiServerImpl();
+		// ServerSrvImpl serversrvimpl = new ServerSrvImpl();
+		
 		serversrvimpl.run();
 	}
 }

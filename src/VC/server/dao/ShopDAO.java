@@ -47,7 +47,7 @@ public class ShopDAO extends DBstart {
 		rs = ps.executeQuery();
 
 		if (rs.next()) {
-			sql = "insert into BorrowedBook values (?, ?, ?, ?, ?)";
+			sql = "insert into shoppingcart values (?, ?, ?, ?, ?)";
 			ps = ct.prepareStatement(sql);
 			ps.setString(1, rs.getString("goodid"));
 			ps.setString(2, User);

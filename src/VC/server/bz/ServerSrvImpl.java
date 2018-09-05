@@ -204,7 +204,7 @@ public class ServerSrvImpl implements ServerSrv {
 
 				// closed = true;
 			}
-			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
+			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
 
 				ShopSrvImpl shopsrv = new ShopSrvImpl();
 				try {
@@ -216,7 +216,7 @@ public class ServerSrvImpl implements ServerSrv {
 
 				// closed = true;
 			}
-			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
+			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
 
 				ShopSrvImpl shopsrv = new ShopSrvImpl();
 				try {
