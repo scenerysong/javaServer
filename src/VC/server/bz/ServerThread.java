@@ -25,7 +25,6 @@ public class ServerThread implements Runnable {
 		int i = 0;
 		while (!isClosed()) {
 			i++;
-			System.out.println(i);
 			Message rcvmsg = new Message();
 			ObjectInputStream ois = null;
 			try {
@@ -43,8 +42,24 @@ public class ServerThread implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			System.out.println("User: " + rcvmsg.getID() + " give the request " + i);
 			System.out.println(rcvmsg.getType());
+			
+			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
+				boolean flag = false;
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				
+				try {
+					flag = loginsrv.judgeLogin(rcvmsg, client);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
@@ -54,16 +69,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
-				try {
-					loginsrv.judgeLogin(rcvmsg, client);
-				} catch (ClassNotFoundException | SQLException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
 
@@ -74,6 +81,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 
@@ -84,6 +93,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_COURSE)) {
 
@@ -94,6 +105,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
 
@@ -104,6 +117,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYCOURSE)) {
 
@@ -114,6 +129,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_BOOK)) {
 
@@ -124,6 +141,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_BOOK)) {
 
@@ -134,6 +153,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_BOOK)) {
 
@@ -144,6 +165,8 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYBOOK)) {
 
@@ -154,6 +177,27 @@ public class ServerThread implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_LOGOUT)) {
+				/*
+				 * 		String logoutQQ = sender.getQqNo();
+					// �ͻ����˳�
+					// ���·�����
+					sender.setStatus(UserStatus.OFFLINE);
+					iud.updUser(sender);
+					// ��֪ͨ�����������û�
+					this.notifyOther(logoutQQ, MessageType.CMD_LOGOUT);				
+
+					QqServerFrame.serverFrame.fireUserDataChange();
+					//
+					isClosed = true;
+					ServerClientThreadMgr.remove(this.owner.getQqNo());
+					break;
+				 */
+				isClosed = true;
+				break;
 			}
 		}
 	}

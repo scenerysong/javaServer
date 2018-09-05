@@ -15,8 +15,9 @@ public class LoginSrvImpl {
 		
 	}
 	
-	public void judgeLogin(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
+	public boolean judgeLogin(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
 		
+		boolean flag = false;
 		LoginDAO logindao = new LoginDAO();
 		LoginMessage loginmsg = new LoginMessage();
 		loginmsg = (LoginMessage) rcvmsg;
@@ -28,11 +29,14 @@ public class LoginSrvImpl {
 		
 		if(loginmsg.getPasswd().equals(logindao.getPasswd(loginmsg.getID()))) {
 			sendmsg.setLoginstat(true);
+			flag = true;
 		}
 		
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(sendmsg);
 		oos.flush();
+		
+		return flag;
 		
 	}
 }
