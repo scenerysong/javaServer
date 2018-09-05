@@ -228,6 +228,30 @@ public class ServerSrvImpl implements ServerSrv {
 
 				// closed = true;
 			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_MY_USER)||rcvmsg.getType().equals(MessageType.CMD_QUY_USER)) {
+
+				StuSrvImpl stusrv = new StuSrvImpl();
+				try {
+					stusrv.getInfo(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_UPDATE_MY_USER)) {
+
+				StuSrvImpl stusrv = new StuSrvImpl();
+				try {
+					stusrv.updateInfo(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
 		}
 	}
 
