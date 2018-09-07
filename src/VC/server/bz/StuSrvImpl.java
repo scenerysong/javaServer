@@ -14,12 +14,14 @@ import VC.common.Message;
 import VC.common.User;
 import VC.common.UserMessage;
 import VC.server.dao.LibraryDAO;
+import VC.server.dao.LoginDAO;
 import VC.server.dao.StuDAO;
 import VC.server.vo.LibrarySrv;
 
 public class StuSrvImpl implements StuSrv{
 
 	public StuDAO studao;
+	private LoginDAO logindao;
 	
 	public StuSrvImpl() {
 		
@@ -38,7 +40,8 @@ public class StuSrvImpl implements StuSrv{
 		Usermsg = (UserMessage) rcvmsg;
 		UserMessage sendmsg = new UserMessage();
 
-		inf = studao.getUserInf(Usermsg.getUsername());
+		if(logindao.JudgeUserType(Usermsg.getID()))
+			inf = studao.getUserInf(Usermsg.getUsername());
 		sendmsg.setUser(inf);;
 
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -47,7 +50,7 @@ public class StuSrvImpl implements StuSrv{
 	}
 	
 	public void updateInfo(Message rcvmsg, Socket socket) throws SQLException, IOException {
-		UserMessage Usermsg = new UserMessage();
+			UserMessage Usermsg = new UserMessage();
 		Usermsg = (UserMessage)rcvmsg;
 		UserMessage sendmsg = new UserMessage();
 		String username = Usermsg.getUsername();
