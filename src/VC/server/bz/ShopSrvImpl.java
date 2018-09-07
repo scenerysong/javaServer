@@ -96,7 +96,6 @@ public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOExce
 		goodname = rmsg.getProductName();
 		username = rmsg.getID();
 		
-		System.out.println("kai shi tui ke step2");
 		res = shopdao.deletegoodfromcart(username, goodname);
 
 		sendmsg.setRes(res);
@@ -118,10 +117,8 @@ public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOE
 	goodnumber = rmsg.getGoodsNum();
 	username = rmsg.getID();
 	
-	System.out.println("kai shi tui ke step2");
 	res = shopdao.payforgoodincart(username, goodname, goodnumber);
 	
-
 	sendmsg.setRes(res);
 
 	ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
