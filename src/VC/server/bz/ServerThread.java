@@ -60,6 +60,29 @@ public class ServerThread implements Runnable {
 				//start a new thread
 					// closed = true;
 			}
+			if (rcvmsg.getType().equals(MessageType.CMD_REGIS_LOGIN)) {
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				
+				try {
+					loginsrv.addUser(rcvmsg, client);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_DEL_LOGIN)) {
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				try {
+					loginsrv.delUser(rcvmsg, client);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
 				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
@@ -77,6 +100,42 @@ public class ServerThread implements Runnable {
 				ShopSrvImpl shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.getAllGoods(rcvmsg, client);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYGOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.getMyGoods(rcvmsg, client);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.addshoppingcart(rcvmsg, client);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
+
+				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.delMygood(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

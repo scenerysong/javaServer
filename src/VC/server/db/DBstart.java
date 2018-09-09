@@ -31,7 +31,7 @@ public class DBstart {
 	 */
 	
 	static {
-		String dbpath = new File("").getAbsolutePath().replace('\\', '/') + "/DatabaseTest.accdb";
+		String dbpath = new File("").getAbsolutePath().replace('\\', '/') + "/vCampus.accdb";
 		// url = "jdbc:odbc:DRIVER={Microsoft Access Driver (*.mdb,
 		// *.accdb)};DBQ="+dbpath;
 		// url = "jdbc:ucanaccess://" + dbpath;

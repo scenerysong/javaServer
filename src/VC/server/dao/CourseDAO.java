@@ -28,6 +28,8 @@ public class CourseDAO extends DBstart{
 			course= new Course();
 			course.setCourseName(rs.getString("coursename"));
 			course.setCourseTeacher(rs.getString("teacher"));
+			course.setCredit(rs.getString("Credit"));
+			course.setCourseID(rs.getString("courseid"));
 			
 			Course.add(course);
 		}
@@ -45,17 +47,18 @@ public class CourseDAO extends DBstart{
 		Course crs = new Course();
 		if(rs.next()) {
 			System.out.println(rs.getString("coursename"));
-			crs.setCourseID(rs.getString("ID"));
+			crs.setCourseID(rs.getString("courseid"));
 			crs.setCourseName(rs.getString("coursename"));
 			crs.setCourseTeacher(rs.getString("teacher"));
 			crs.setCredit(rs.getString("Credit"));
-			sql = "insert into CourseUser (User, CourseName, Teacher, Credit) values (?, ?, ?, ?) ";
+			sql = "insert into CourseUser (User, CourseName, Teacher, Credit, courseid) values (?, ?, ?, ?, ?) ";
 			ps = ct.prepareStatement(sql);
 			//ps.setString(1, "6");
 			ps.setString(1, Users);
 			ps.setString(2, crs.getCourseName());
 			ps.setString(3, crs.getCourseTeacher());
 			ps.setString(4, crs.getCredit());
+			ps.setString(5, crs.getCourseID());
 			//ps.executeUpdate();
 			ps.execute();
 		}
@@ -68,12 +71,14 @@ public class CourseDAO extends DBstart{
 		ps.setString(1, Users);
 		rs = ps.executeQuery();
 		
-		Course crs = new Course();
+		Course crs;
 		List<Course> Crs = new ArrayList<Course>();
 		
 		while(rs.next()) {
+			crs = new Course();
 			crs.setCourseName(rs.getString("CourseName"));
-			//crs.setCourseID(rs.getString("ID"));
+			crs.setCourseID(rs.getString("courseid"));
+			System.out.println(rs.getString("courseid"));
 			crs.setCourseTeacher(rs.getString("Teacher"));
 			crs.setCredit(rs.getString("Credit"));
 			

@@ -78,7 +78,29 @@ public class MultiServerImpl implements ServerSrv {
 				//start a new thread
 					// closed = true;
 			}
-			
+			if (rcvmsg.getType().equals(MessageType.CMD_REGIS_LOGIN)) {
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				
+				try {
+					loginsrv.addUser(rcvmsg, rsvsocket);
+				} catch (SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
+			if (rcvmsg.getType().equals(MessageType.CMD_DEL_LOGIN)) {
+				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				try {
+					loginsrv.delUser(rcvmsg, rsvsocket);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//start a new thread
+					// closed = true;
+			}
 			ServerThread st = new ServerThread(rsvsocket, rcvmsg.getID());
 			new Thread(st).start();
 		}

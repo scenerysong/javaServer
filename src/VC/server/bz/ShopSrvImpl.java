@@ -67,18 +67,21 @@ public class ShopSrvImpl {
 	public void addshoppingcart(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		GoodsMessage sendmsg = new GoodsMessage();
-		String goodname = null;
 		String username = null;
-		String number = null;
+		List<String> goodname;
+		List<String> goodnum;
 		
 		boolean res = false;
 		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
-		goodname = rmsg.getProductName();
+		goodname = rmsg.getGoodsName();
 		username = rmsg.getID();
-		number = rmsg.getGoodsNum();
+		goodnum = rmsg.getNum();
 		
-		res = shopdao.addtoshoppingcart(username, goodname, number);
+		for(int i=0;i<goodname.size();i++) {
+			shopdao.addtoshoppingcart(username, goodname.get(i), goodnum.get(i));
+		}
 
+		res = true;
 		sendmsg.setRes(res);
 
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
