@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import VC.server.vo.ServerThreadSrv;
+
 
 public class ServerThreadMgr {
 
@@ -13,11 +15,11 @@ public class ServerThreadMgr {
 		clientThreadPool.put(userNo, clientThreadSrv);		
 	}
 
-	public synchronized static ServerThread remove(String userNo) {
+	public synchronized static ServerThreadSrv remove(String userNo) {
 		return clientThreadPool.remove(userNo);		
 	}
-	public synchronized static ServerThread get(String userNo) {
-		ServerThread cts = clientThreadPool.get(userNo);		
+	public synchronized static ServerThreadSrv get(String userNo) {
+		ServerThreadSrv cts = clientThreadPool.get(userNo);		
 		return cts;		
 	}
 	public synchronized static Map<String, ServerThread> getPool(){

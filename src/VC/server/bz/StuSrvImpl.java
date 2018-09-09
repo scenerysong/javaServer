@@ -35,6 +35,10 @@ public class StuSrvImpl implements StuSrv{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.StuSrv#getInfo(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void getInfo(Message rcvmsg, Socket socket) throws SQLException, IOException {
 		User inf = new User();
 		UserMessage Usermsg = new UserMessage();
@@ -54,6 +58,10 @@ public class StuSrvImpl implements StuSrv{
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.StuSrv#updateInfo(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void updateInfo(Message rcvmsg, Socket socket) throws SQLException, IOException {
 			
 		UserMessage Usermsg = new UserMessage();

@@ -31,6 +31,10 @@ public class LibrarySrvImpl implements LibrarySrv {
 	}
 
 	// 注意此处传入的参数
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LibrarySrv#searchByBooknameSend(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void searchByBooknameSend(Message rcvmsg, Socket socket)
 			throws SQLException, IOException, ClassNotFoundException {
 
@@ -52,6 +56,9 @@ public class LibrarySrvImpl implements LibrarySrv {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LibrarySrv#getAllBook(VC.common.Message, java.net.Socket)
+	 */
 	public void getAllBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Book> Booklist = new ArrayList<Book>();
@@ -68,6 +75,9 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LibrarySrv#getMyBook(VC.common.Message, java.net.Socket)
+	 */
 	public void getMyBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Book> Booklist = new ArrayList<Book>();
@@ -85,6 +95,9 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LibrarySrv#borrowbook(VC.common.Message, java.net.Socket)
+	 */
 	public void borrowbook(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		BookMessage sendmsg = new BookMessage();
@@ -104,6 +117,9 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LibrarySrv#returnbook(VC.common.Message, java.net.Socket)
+	 */
 	public void returnbook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		BookMessage sendmsg = new BookMessage();
@@ -114,7 +130,6 @@ public class LibrarySrvImpl implements LibrarySrv {
 		Bookname = rmsg.getBookname();
 		username = rmsg.getID();
 		
-		System.out.println("kai shi tui ke step2");
 		res = librarydao.returnbook(username, Bookname);
 
 		sendmsg.setRes(res);

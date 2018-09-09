@@ -12,8 +12,9 @@ import VC.common.Goods;
 import VC.common.GoodsMessage;
 import VC.common.Message;
 import VC.server.dao.ShopDAO;
+import VC.server.vo.ShopSrv;
 
-public class ShopSrvImpl {
+public class ShopSrvImpl implements ShopSrv {
 
 	public ShopDAO shopdao;
 	
@@ -30,6 +31,10 @@ public class ShopSrvImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ShopSrv#getAllGoods(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void getAllGoods(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		
@@ -47,6 +52,10 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ShopSrv#getMyGoods(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void getMyGoods(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Goods> Goodslist = new ArrayList<Goods>();
@@ -64,6 +73,10 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ShopSrv#addshoppingcart(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void addshoppingcart(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		GoodsMessage sendmsg = new GoodsMessage();
@@ -89,6 +102,10 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 	
+/* (non-Javadoc)
+ * @see VC.server.bz.ShopSrv#delMygood(VC.common.Message, java.net.Socket)
+ */
+@Override
 public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		GoodsMessage sendmsg = new GoodsMessage();
@@ -108,6 +125,10 @@ public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOExce
 		oos.flush();
 	}
 	
+/* (non-Javadoc)
+ * @see VC.server.bz.ShopSrv#payforMygood(VC.common.Message, java.net.Socket)
+ */
+@Override
 public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 	
 	GoodsMessage sendmsg = new GoodsMessage();

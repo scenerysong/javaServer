@@ -7,8 +7,14 @@ import java.sql.SQLException;
 
 import VC.common.Message;
 import VC.common.MessageType;
+import VC.server.vo.CourseSrv;
+import VC.server.vo.LibrarySrv;
+import VC.server.vo.LoginSrv;
+import VC.server.vo.ServerThreadSrv;
+import VC.server.vo.ShopSrv;
+import VC.server.vo.StuSrv;
 
-public class ServerThread implements Runnable {
+public class ServerThread implements Runnable, ServerThreadSrv {
 
 	private Socket client;
 	private String User;
@@ -20,6 +26,10 @@ public class ServerThread implements Runnable {
 		this.setClosed(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#run()
+	 */
+	@Override
 	public void run() {
 		
 		int i = 0;
@@ -49,7 +59,7 @@ public class ServerThread implements Runnable {
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
 				boolean flag = false;
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				
 				try {
 					flag = loginsrv.judgeLogin(rcvmsg, client);
@@ -61,7 +71,7 @@ public class ServerThread implements Runnable {
 					// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_REGIS_LOGIN)) {
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				
 				try {
 					loginsrv.addUser(rcvmsg, client);
@@ -73,7 +83,7 @@ public class ServerThread implements Runnable {
 					// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DEL_LOGIN)) {
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				try {
 					loginsrv.delUser(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -85,7 +95,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
-				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
+				LibrarySrv librarysrvimpl = new LibrarySrvImpl();
 				try {
 					librarysrvimpl.searchByBooknameSend(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -97,7 +107,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.getAllGoods(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -109,7 +119,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYGOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.getMyGoods(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -121,7 +131,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.addshoppingcart(rcvmsg, client);
 				} catch (SQLException | IOException e) {
@@ -133,7 +143,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.delMygood(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -145,7 +155,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.getAllCourse(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -157,7 +167,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.addCourse(rcvmsg, client);
 				} catch (SQLException | IOException e) {
@@ -169,7 +179,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.delMyCourse(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -181,7 +191,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYCOURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.getMyCourse(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -241,7 +251,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_MY_USER)||rcvmsg.getType().equals(MessageType.CMD_QUY_USER)) {
 
-				StuSrvImpl stusrv = new StuSrvImpl();
+				StuSrv stusrv = new StuSrvImpl();
 				try {
 					stusrv.getInfo(rcvmsg, client);
 				} catch (SQLException | IOException e) {
@@ -253,7 +263,7 @@ public class ServerThread implements Runnable {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_UPDATE_MY_USER)) {
 
-				StuSrvImpl stusrv = new StuSrvImpl();
+				StuSrv stusrv = new StuSrvImpl();
 				try {
 					stusrv.updateInfo(rcvmsg, client);
 				} catch (SQLException | IOException e) {
@@ -285,26 +295,50 @@ public class ServerThread implements Runnable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#getClient()
+	 */
+	@Override
 	public Socket getClient() {
 		return client;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#setClient(java.net.Socket)
+	 */
+	@Override
 	public void setClient(Socket client) {
 		this.client = client;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#getUser()
+	 */
+	@Override
 	public String getUser() {
 		return User;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#setUser(java.lang.String)
+	 */
+	@Override
 	public void setUser(String user) {
 		User = user;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#isClosed()
+	 */
+	@Override
 	public boolean isClosed() {
 		return isClosed;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerThreadSrv#setClosed(boolean)
+	 */
+	@Override
 	public void setClosed(boolean isClosed) {
 		this.isClosed = isClosed;
 	}

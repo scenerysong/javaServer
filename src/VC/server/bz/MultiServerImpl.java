@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import VC.common.Message;
 import VC.common.MessageType;
 import VC.common.SocketConstant;
+import VC.server.vo.LoginSrv;
+import VC.server.vo.MultiServer;
 import VC.server.vo.ServerSrv;
 
-public class MultiServerImpl implements ServerSrv {
+public class MultiServerImpl implements ServerSrv, MultiServer {
 
 	private ServerSocket serversocket = null;
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;
@@ -26,6 +28,10 @@ public class MultiServerImpl implements ServerSrv {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.MultiServer#run()
+	 */
+	@Override
 	public void run() {
 
 		int i = 0;
@@ -67,7 +73,7 @@ public class MultiServerImpl implements ServerSrv {
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
 				boolean flag = false;
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				
 				try {
 					flag = loginsrv.judgeLogin(rcvmsg, rsvsocket);
@@ -79,7 +85,7 @@ public class MultiServerImpl implements ServerSrv {
 					// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_REGIS_LOGIN)) {
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				
 				try {
 					loginsrv.addUser(rcvmsg, rsvsocket);
@@ -91,7 +97,7 @@ public class MultiServerImpl implements ServerSrv {
 					// closed = true;
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DEL_LOGIN)) {
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				try {
 					loginsrv.delUser(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -106,18 +112,34 @@ public class MultiServerImpl implements ServerSrv {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.MultiServer#getServersocket()
+	 */
+	@Override
 	public ServerSocket getServersocket() {
 		return serversocket;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.MultiServer#setServersocket(java.net.ServerSocket)
+	 */
+	@Override
 	public void setServersocket(ServerSocket serversocket) {
 		this.serversocket = serversocket;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.MultiServer#isClosed()
+	 */
+	@Override
 	public boolean isClosed() {
 		return closed;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.MultiServer#setClosed(boolean)
+	 */
+	@Override
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}

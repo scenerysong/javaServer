@@ -8,6 +8,15 @@ import VC.common.Message;
 
 public interface LibrarySrv {
 
-	public void searchByBooknameSend(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
-	
+	// 注意此处传入的参数
+	void searchByBooknameSend(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
+
+	void getAllBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
+
+	void getMyBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
+
+	void borrowbook(Message rcvmsg, Socket socket) throws SQLException, IOException;
+
+	void returnbook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
+
 }

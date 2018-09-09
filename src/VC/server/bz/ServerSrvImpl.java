@@ -8,7 +8,12 @@ import java.sql.SQLException;
 import VC.common.Message;
 import VC.common.MessageType;
 import VC.common.SocketConstant;
+import VC.server.vo.CourseSrv;
+import VC.server.vo.LibrarySrv;
+import VC.server.vo.LoginSrv;
 import VC.server.vo.ServerSrv;
+import VC.server.vo.ShopSrv;
+import VC.server.vo.StuSrv;
 
 public class ServerSrvImpl implements ServerSrv {
 
@@ -26,6 +31,10 @@ public class ServerSrvImpl implements ServerSrv {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerSrv#run()
+	 */
+	@Override
 	public void run() {
 
 		int i = 0;
@@ -62,7 +71,7 @@ public class ServerSrvImpl implements ServerSrv {
 			
 			if (rcvmsg.getType().equals(MessageType.CMD_QUY_BOOK_BOOKNAME)) {
 
-				LibrarySrvImpl librarysrvimpl = new LibrarySrvImpl();
+				LibrarySrv librarysrvimpl = new LibrarySrvImpl();
 				try {
 					librarysrvimpl.searchByBooknameSend(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -74,7 +83,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
-				LoginSrvImpl loginsrv = new LoginSrvImpl();
+				LoginSrv loginsrv = new LoginSrvImpl();
 				try {
 					loginsrv.judgeLogin(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -86,7 +95,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.getAllCourse(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -98,7 +107,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.addCourse(rcvmsg, rsvsocket);
 				} catch (SQLException | IOException e) {
@@ -110,7 +119,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_DELETE_ALL_COURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.delMyCourse(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -122,7 +131,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYCOURSE)) {
 
-				CourseSrvImpl coursesrv = new CourseSrvImpl();
+				CourseSrv coursesrv = new CourseSrvImpl();
 				try {
 					coursesrv.getMyCourse(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -182,7 +191,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.getAllGoods(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -194,7 +203,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_MYGOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.getMyGoods(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -206,7 +215,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_ADD_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.addshoppingcart(rcvmsg, rsvsocket);
 				} catch (SQLException | IOException e) {
@@ -218,7 +227,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_BUY_ALL_GOODS)) {
 
-				ShopSrvImpl shopsrv = new ShopSrvImpl();
+				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
 					shopsrv.delMygood(rcvmsg, rsvsocket);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
@@ -230,7 +239,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_MY_USER)||rcvmsg.getType().equals(MessageType.CMD_QUY_USER)) {
 
-				StuSrvImpl stusrv = new StuSrvImpl();
+				StuSrv stusrv = new StuSrvImpl();
 				try {
 					stusrv.getInfo(rcvmsg, rsvsocket);
 				} catch (SQLException | IOException e) {
@@ -242,7 +251,7 @@ public class ServerSrvImpl implements ServerSrv {
 			}
 			if (rcvmsg.getType().equals(MessageType.CMD_UPDATE_MY_USER)) {
 
-				StuSrvImpl stusrv = new StuSrvImpl();
+				StuSrv stusrv = new StuSrvImpl();
 				try {
 					stusrv.updateInfo(rcvmsg, rsvsocket);
 				} catch (SQLException | IOException e) {
@@ -255,18 +264,34 @@ public class ServerSrvImpl implements ServerSrv {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerSrv#getServersocket()
+	 */
+	@Override
 	public ServerSocket getServersocket() {
 		return serversocket;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerSrv#setServersocket(java.net.ServerSocket)
+	 */
+	@Override
 	public void setServersocket(ServerSocket serversocket) {
 		this.serversocket = serversocket;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerSrv#isClosed()
+	 */
+	@Override
 	public boolean isClosed() {
 		return closed;
 	}
 
+	/* (non-Javadoc)
+	 * @see VC.server.bz.ServerSrv#setClosed(boolean)
+	 */
+	@Override
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}

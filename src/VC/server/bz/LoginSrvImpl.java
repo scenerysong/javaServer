@@ -11,8 +11,9 @@ import VC.common.Message;
 import VC.common.User;
 import VC.common.UserMessage;
 import VC.server.dao.LoginDAO;
+import VC.server.vo.LoginSrv;
 
-public class LoginSrvImpl {
+public class LoginSrvImpl implements LoginSrv {
 
 	private LoginDAO logindao;
 	
@@ -28,6 +29,10 @@ public class LoginSrvImpl {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LoginSrv#judgeLogin(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public boolean judgeLogin(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
 		
 		boolean flag = false;
@@ -53,6 +58,10 @@ public class LoginSrvImpl {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LoginSrv#addUser(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void addUser(Message rcvmsg, Socket socket) throws SQLException, IOException {
 		LoginMessage sendmsg = new LoginMessage();
 		boolean res = false;
@@ -77,6 +86,10 @@ public class LoginSrvImpl {
 		oos.flush();
 	}
 	
+	/* (non-Javadoc)
+	 * @see VC.server.bz.LoginSrv#delUser(VC.common.Message, java.net.Socket)
+	 */
+	@Override
 	public void delUser(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		LoginMessage sendmsg = new LoginMessage();

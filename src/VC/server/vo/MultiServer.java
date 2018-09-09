@@ -2,7 +2,7 @@ package VC.server.vo;
 
 import java.net.ServerSocket;
 
-public interface ServerSrv {
+public interface MultiServer {
 
 	void run();
 
