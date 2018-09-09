@@ -28,6 +28,7 @@ public class LoginSrvImpl {
 		}
 	}
 	
+	// check the password of a user and return the result of the login
 	public boolean judgeLogin(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
 		
 		boolean flag = false;
@@ -53,6 +54,7 @@ public class LoginSrvImpl {
 		
 	}
 	
+	// register for a user
 	public void addUser(Message rcvmsg, Socket socket) throws SQLException, IOException {
 		LoginMessage sendmsg = new LoginMessage();
 		boolean res = false;
@@ -62,6 +64,8 @@ public class LoginSrvImpl {
 		String b = rmsg.getPasswd();
 		
 		String ifsuperuser = "user";
+		
+		//check the code for superuser
 		if(rmsg.getAdmincode().equals("23333"))
 			ifsuperuser = "superuser";
 		System.out.println("this is srv step");
@@ -77,6 +81,7 @@ public class LoginSrvImpl {
 		oos.flush();
 	}
 	
+	//delete a course the user has chosen and return the result of the operation
 	public void delUser(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		LoginMessage sendmsg = new LoginMessage();

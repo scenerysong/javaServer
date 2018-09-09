@@ -14,6 +14,7 @@ public class CourseDAO extends DBstart{
 		// TODO Auto-generated constructor stub
 	}
 
+	//get all of the course in the database
 	public List<Course> getAllCourse() throws SQLException{
 		
 		sql = "select * from course";
@@ -37,6 +38,7 @@ public class CourseDAO extends DBstart{
 		return Course;
 	}
 	
+	//add a course for a user
 	public boolean AddCourse(String Users, String coursename) throws SQLException {
 		sql = "select * from course where coursename = ?";
 		ps = ct.prepareStatement(sql);
@@ -65,6 +67,7 @@ public class CourseDAO extends DBstart{
 		return true;
 	}
 	
+	//get all of the course the user has chosen 
 	public List<Course> GetAllMyCourse(String Users) throws SQLException {
 		sql = "select * from CourseUser where User = ?";
 		ps = ct.prepareStatement(sql);

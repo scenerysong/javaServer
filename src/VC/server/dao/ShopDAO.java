@@ -15,6 +15,7 @@ public class ShopDAO extends DBstart {
 		// TODO Auto-generated constructor stub
 	}
 
+	//get all of the goods in the database
 	public List<Goods> getAllGoods() throws SQLException {
 
 		sql = "select * from goods";
@@ -107,6 +108,7 @@ public class ShopDAO extends DBstart {
 		return true;
 	}
 
+	//search the good through a given name 
 	public Goods getgoodBygoodname(String goodname) throws SQLException {
 		sql = "select * from goods where goodname = ?";
 		ps = ct.prepareStatement(sql);
@@ -124,6 +126,7 @@ public class ShopDAO extends DBstart {
 		return gd;
 	}
 
+	//update the number of  a good in database
 	public boolean setNumber(String goodname, String number) throws SQLException {
 		sql = "update goods set goodnumber = ? where goodname = ?"; 
 		ps = ct.prepareStatement(sql);
@@ -133,9 +136,11 @@ public class ShopDAO extends DBstart {
 		return ps.executeUpdate() > 0;
 	}
 	
+	// update the database after the operation of payment
 	public boolean payforgood(String Users, String goodname, String goodnumber) throws SQLException, ClassNotFoundException {
 		LoginDAO logindao = new LoginDAO();
 		
+		//deduct the balance of a user needing payment service
 		Goods good = getgoodBygoodname(goodname);
 		int onecost = Integer.valueOf(good.getValue()).intValue();
 		int money = logindao.getBalance(Users);
@@ -145,9 +150,11 @@ public class ShopDAO extends DBstart {
 
 		if(!logindao.setBalance(Users, String.valueOf(money))) return false;
 		
+		//update the number of goods in database
 		int rest = Integer.valueOf(good.getGoodsNum()).intValue() - number;
 		if(!setNumber(goodname, String.valueOf(rest))) return false;
 		
+		//update the profits of shop 
 		sql = "select * from statistic where key = ?";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, "income");

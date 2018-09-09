@@ -26,6 +26,7 @@ public class ServerSrvImpl implements ServerSrv {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
+	//create a main thread for single thread
 	public void run() {
 
 		int i = 0;

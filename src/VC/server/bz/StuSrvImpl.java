@@ -35,6 +35,7 @@ public class StuSrvImpl implements StuSrv{
 		
 	}
 	
+	// get the information of a user and return the result of the operation
 	public void getInfo(Message rcvmsg, Socket socket) throws SQLException, IOException {
 		User inf = new User();
 		UserMessage Usermsg = new UserMessage();
@@ -54,6 +55,7 @@ public class StuSrvImpl implements StuSrv{
 		oos.flush();
 	}
 	
+	// update the information of a user and return the result of the operation
 	public void updateInfo(Message rcvmsg, Socket socket) throws SQLException, IOException {
 			
 		UserMessage Usermsg = new UserMessage();

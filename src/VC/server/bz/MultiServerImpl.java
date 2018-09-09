@@ -26,6 +26,7 @@ public class MultiServerImpl implements ServerSrv {
 		System.out.println("Server is on the PORT " + SERVER_PORT + " listening");
 	}
 
+	// create a thread for a user
 	public void run() {
 
 		int i = 0;
@@ -36,6 +37,7 @@ public class MultiServerImpl implements ServerSrv {
 			Socket rsvsocket = null;
 			
 			try {
+				//get the socket
 				rsvsocket = serversocket.accept();
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
@@ -64,6 +66,7 @@ public class MultiServerImpl implements ServerSrv {
 			
 			System.out.println(rcvmsg.getType());
 			
+			//judge the type of the message
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
 				boolean flag = false;
