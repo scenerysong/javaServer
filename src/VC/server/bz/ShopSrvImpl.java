@@ -30,6 +30,7 @@ public class ShopSrvImpl {
 		}
 	}
 
+	//get all goods in the database and send the message to the client
 	public void getAllGoods(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		
@@ -47,6 +48,7 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 
+	//get all of the goods a user has chosen for his shopping cart and send the message to the client
 	public void getMyGoods(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Goods> Goodslist = new ArrayList<Goods>();
@@ -64,6 +66,7 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 	
+	// add a good to shopping cart and return the result of the operation
 	public void addshoppingcart(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		GoodsMessage sendmsg = new GoodsMessage();
@@ -89,6 +92,7 @@ public class ShopSrvImpl {
 		oos.flush();
 	}
 	
+	//delete a good in shopping cart and return the result of the operation
 public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		GoodsMessage sendmsg = new GoodsMessage();
@@ -108,6 +112,7 @@ public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOExce
 		oos.flush();
 	}
 	
+//pay for a good in shopping cart and return the result of the operation
 public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 	
 	GoodsMessage sendmsg = new GoodsMessage();

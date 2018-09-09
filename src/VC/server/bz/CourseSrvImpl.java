@@ -28,6 +28,7 @@ public class CourseSrvImpl {
 		}
 	}
 
+	//get all courses in the database and send the message to the client
 	public void getAllCourse(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Course> Courselist = new ArrayList<Course>();
@@ -44,7 +45,8 @@ public class CourseSrvImpl {
 		oos.writeObject(sendmsg);
 		oos.flush();
 	}
-;
+
+	// add a course for a user and return the result of the operation
 	public void addCourse(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		CourseMessage sendmsg = new CourseMessage();
@@ -64,6 +66,7 @@ public class CourseSrvImpl {
 		oos.flush();
 	}
 
+	//get all of the courses a user has chosen and send the message to the client
 	public void getMyCourse(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Course> Courselist = new ArrayList<Course>();
@@ -82,6 +85,7 @@ public class CourseSrvImpl {
 		oos.flush();
 	}
 	
+	//delete a course the user has chosen and return the result of the operation
 	public void delMyCourse(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		CourseMessage sendmsg = new CourseMessage();

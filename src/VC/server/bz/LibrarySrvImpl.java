@@ -30,7 +30,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		}
 	}
 
-	// 注意此处传入的参数
+	// get all of the books called the given name in the database and return the list of books to the client
 	public void searchByBooknameSend(Message rcvmsg, Socket socket)
 			throws SQLException, IOException, ClassNotFoundException {
 
@@ -52,6 +52,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 
 	}
 
+	//get all books in the database and send the message to the client
 	public void getAllBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Book> Booklist = new ArrayList<Book>();
@@ -68,6 +69,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 
+	//get all of the books a user has borrowed and and return the list of books to the client
 	public void getMyBook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		List<Book> Booklist = new ArrayList<Book>();
@@ -85,6 +87,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 	
+	//borrow a book for a user and return the result of the operation 
 	public void borrowbook(Message rcvmsg, Socket socket) throws SQLException, IOException {
 
 		BookMessage sendmsg = new BookMessage();
@@ -104,6 +107,7 @@ public class LibrarySrvImpl implements LibrarySrv {
 		oos.flush();
 	}
 	
+	//return a book for a user and return the result of the operation
 	public void returnbook(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 		
 		BookMessage sendmsg = new BookMessage();

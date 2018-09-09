@@ -11,7 +11,8 @@ public class LoginDAO extends DBstart{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	//get the password of a user 
 	public String getPasswd(String usrname) throws SQLException {
 		
 		String pwd = null;
@@ -32,6 +33,7 @@ public class LoginDAO extends DBstart{
 		return pwd;
 	}
 	
+	//add a user into database
 	public boolean addUser(String username, String passwd, String usertype) throws SQLException {
 		sql = "select * from login where usrname = ?";
 		ps = ct.prepareStatement(sql);
@@ -49,6 +51,7 @@ public class LoginDAO extends DBstart{
 		else return false;
 	}
 	
+	//delete a user in database
 	public boolean delUser(String username) throws SQLException {
 		sql = "delete from login where usrname = ?";
 		ps = ct.prepareStatement(sql);
@@ -58,6 +61,7 @@ public class LoginDAO extends DBstart{
 		else return false;
 	}
 
+	//Judge the type of user
 	public boolean JudgeUserType(String username) throws SQLException {
 		sql = "select * from login where usrname = ?";
 		ps = ct.prepareStatement(sql);
@@ -72,6 +76,7 @@ public class LoginDAO extends DBstart{
 		else return false;
 	}
 	
+	// get the balance of a user in database
 	public int getBalance(String username) throws SQLException {
 		sql = "select * from login where usrname = ?";
 		ps = ct.prepareStatement(sql);
@@ -81,6 +86,7 @@ public class LoginDAO extends DBstart{
 		else return -1; 
 	}
 	
+	// update the balance of a user in database
 	public boolean setBalance(String username, String balance) throws SQLException {
 		sql = "update login set balance = ? where usrname = ?";
 		ps = ct.prepareStatement(sql);

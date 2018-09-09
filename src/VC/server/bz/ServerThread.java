@@ -20,10 +20,12 @@ public class ServerThread implements Runnable {
 		this.setClosed(false);
 	}
 
+	//create a new main thread for multi-thread
 	public void run() {
 		
 		int i = 0;
 		while (!isClosed()) {
+			//get the message
 			i++;
 			Message rcvmsg = new Message();
 			ObjectInputStream ois = null;
@@ -46,6 +48,7 @@ public class ServerThread implements Runnable {
 			System.out.println("User: " + rcvmsg.getID() + " give the request " + i);
 			System.out.println(rcvmsg.getType());
 			
+			////judge the type of the message
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
 
 				boolean flag = false;

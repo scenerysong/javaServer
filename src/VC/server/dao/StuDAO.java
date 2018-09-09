@@ -14,6 +14,7 @@ public class StuDAO extends DBstart{
 		super();
 	}
 		// TODO Auto-generated constructor stub
+	//get the personal information of a user in database 
 	public User getUserInf(String Users) throws SQLException{
 		
 		sql = "select * from login where usrname = ?";
@@ -36,6 +37,7 @@ public class StuDAO extends DBstart{
 		return inf;
 	}
 	
+	// update the personal information of a user in database
 	public boolean modifyinf(String Users, User inf) throws SQLException {
 		sql = "update login set personname = ?, sex = ?, race = ?, birthday = ?"
 				+ "where usrname = ?";
