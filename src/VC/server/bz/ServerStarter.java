@@ -47,6 +47,7 @@ public class ServerStarter extends Application{
 			public void handle(ActionEvent e) {
 				//hanshu
 			}
+			
 		});
 		
 		
@@ -70,6 +71,7 @@ public class ServerStarter extends Application{
 		int size = 	items.size();
 		x.getChildren().add(list);
 		list.setItems(items);
+		list.refresh();
 //		items.remove(1);
 		items.add(size, "你怕skr啥子");
 //		items.clear();

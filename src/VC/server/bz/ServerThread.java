@@ -153,6 +153,18 @@ public class ServerThread implements Runnable, ServerThreadSrv {
 
 				// closed = true;
 			}
+			if (rcvmsg.getType().equals(MessageType.CMD_GET_BALANCE)) {
+
+				ShopSrv shopsrv = new ShopSrvImpl();
+				try {
+					shopsrv.getMyBalance(rcvmsg, client);
+				} catch (ClassNotFoundException | SQLException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// closed = true;
+			}
 			if (rcvmsg.getType().equals(MessageType.CMD_GET_ALL_COURSE)) {
 
 				CourseSrv coursesrv = new CourseSrvImpl();

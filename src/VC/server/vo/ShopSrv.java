@@ -62,4 +62,13 @@ public interface ShopSrv {
 	 */
 	void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException;
 
+	/**
+	 * 得到用户的余额
+	 * @param rcvmsg
+	 * @param socket
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	void getMyBalance(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException;
 }

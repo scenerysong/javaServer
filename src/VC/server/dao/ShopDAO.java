@@ -1,5 +1,16 @@
 package VC.server.dao;
 
+/**
+ * class {@code ShopDAO} is the subclass of class {@link VC.server.db.DBstart} for database.
+ * <p>it is used to get the information from database according to the requirements and do some simple data processing if needed.
+ * including methods for maintaining the information of goods.
+ * 
+ * @author Guangwei Xiong
+ * @author Linsong Wang 
+ * 
+ * @version 1.0
+*/
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +26,22 @@ public class ShopDAO extends DBstart {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * 
+	 * get all of the goods in the database
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * List<Goods> goods = new ArrayList<Goods>();
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * goods = shopdao.getAllGoods();
+	 * }
+	 * 
+	 * @return the information of all goods in database
+	 * @throws SQLException
+	 */
 	public List<Goods> getAllGoods() throws SQLException {
 
 		sql = "select * from goods";
@@ -38,8 +65,26 @@ public class ShopDAO extends DBstart {
 		return goods;
 
 	}
-
-	// add the good to the shopping cart.
+	/**
+	 * add the good to the shopping cart.
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String User = "lsx";
+	 * String goodname = "potatochips";
+	 * String number = "1";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.addtoshoppingcart(User, goodname, number);
+	 * } 
+	 * 
+	 * @param User
+	 * @param goodname
+	 * @param number
+	 * @return the result of operation
+	 * @throws SQLException
+	 */
 	public boolean addtoshoppingcart(String User, String goodname, String number) throws SQLException {
 		sql = "select * from goods where goodname = ?";
 		ps = ct.prepareStatement(sql);
@@ -47,13 +92,13 @@ public class ShopDAO extends DBstart {
 		rs = ps.executeQuery();
 
 		if (rs.next()) {
-			sql = "insert into BorrowedBook values (?, ?, ?, ?, ?)";
+			sql = "insert into shoppingcart (User, goodname, goodvalue, goodnumber, goodid) values (?, ?, ?, ?, ?)";
 			ps = ct.prepareStatement(sql);
-			ps.setString(1, rs.getString("goodid"));
-			ps.setString(2, User);
-			ps.setString(3, rs.getString("goodname"));
-			ps.setString(4, rs.getString("goodvalue"));
-			ps.setString(5, number);
+			ps.setString(5, rs.getString("goodid"));
+			ps.setString(1, User);
+			ps.setString(2, rs.getString("goodname"));
+			ps.setString(3, rs.getString("goodvalue"));
+			ps.setString(4, number);
 			if (ps.executeUpdate() > 0)
 				return true;
 			else
@@ -62,7 +107,24 @@ public class ShopDAO extends DBstart {
 			return false;
 	}
 
-	// return all goods the user has put into shopping cart
+	/**
+	 * 
+	 * return all goods the user has put into shopping cart
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * List<Goods> Gds = new ArrayList<Goods>();
+	 * String User = "lsx";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * Gds = shopdao.GetMyshoppingcart(User);
+	 * } 
+	 * 
+	 * @param Users
+	 * @return the goods in shopping cart
+	 * @throws SQLException
+	 */
 	public List<Goods> GetMyshoppingcart(String Users) throws SQLException {
 		sql = "select * from shoppingcart where user = ?";
 		ps = ct.prepareStatement(sql);
@@ -85,7 +147,25 @@ public class ShopDAO extends DBstart {
 		return Gds;
 	}
 
-	// delete the record of good
+	/**
+	 * 
+	 * delete the record of good
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String User = "lsx";
+	 * String goodname = "potatochips";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.deletegoodfromcart(User, goodname);
+	 * } 
+	 * 
+	 * @param Users
+	 * @param goodname
+	 * @return the result of operation
+	 * @throws SQLException
+	 */
 	public boolean deletegoodfromcart(String Users, String goodname) throws SQLException {
 		sql = "delete from shoppingcart where user = ? and goodname = ?";
 		ps = ct.prepareStatement(sql);
@@ -96,9 +176,29 @@ public class ShopDAO extends DBstart {
 		else
 			return false;
 	}
-
-	// **We need to add the modification for the rest of the goods and the money of
-	// users.
+	
+	/**
+	 * 
+	 * maintain the data after the payment including removing the cart and maintain the balance of users and number of goods.  
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String User = "lsx";
+	 * String goodname = "potatochips";
+	 * String goodnumber = "1";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.deletegoodfromcart(User, goodname, goodnumber);
+	 * } 
+	 * 
+	 * @param Users
+	 * @param goodname
+	 * @param goodnumber
+	 * @return the result of operation
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean payforgoodincart(String Users, String goodname, String goodnumber) throws SQLException, ClassNotFoundException {
 		if (deletegoodfromcart(Users, goodname) == false)
 			return false;
@@ -107,6 +207,25 @@ public class ShopDAO extends DBstart {
 		return true;
 	}
 
+	
+	/**
+	 * 
+	 * search the good through a given name 
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String goodname = "potatochips";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.getgoodBygoodname(goodname);
+	 * } 
+	 * 
+	 * @param goodname
+	 * @return the information of good
+	 * @throws SQLException
+	 */
+	//
 	public Goods getgoodBygoodname(String goodname) throws SQLException {
 		sql = "select * from goods where goodname = ?";
 		ps = ct.prepareStatement(sql);
@@ -123,7 +242,26 @@ public class ShopDAO extends DBstart {
 		}
 		return gd;
 	}
-
+	/**
+	 * 
+	 * update the number of  a good in database
+	 * 
+	 * <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String goodname = "potatochips";
+	 * String goodnumber = "goodnumber";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.setNumber(goodname, goodnumber);
+	 * }
+	 *  
+	 * @param goodname
+	 * @param number
+	 * @return the result of  operation
+	 * @throws SQLException
+	 */
+	
 	public boolean setNumber(String goodname, String number) throws SQLException {
 		sql = "update goods set goodnumber = ? where goodname = ?"; 
 		ps = ct.prepareStatement(sql);
@@ -133,9 +271,34 @@ public class ShopDAO extends DBstart {
 		return ps.executeUpdate() > 0;
 	}
 	
+	/**
+	 * 
+	 * maintain the balance and the number of goods
+	 * 
+	 *  <p><pre>{@code
+	 * show how to use this method
+	 * 
+	 * String User = "wls";
+	 * String goodname = "potatochips";
+	 * String goodnumber = "goodnumber";
+	 * ShopDAO shopdao = new ShopDAO();
+	 * 
+	 * flag = shopdao.payforgood(User, goodname, goodnumber);
+	 * }
+	 * 
+	 * @param Users
+	 * @param goodname
+	 * @param goodnumber
+	 * @return the result of operation
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean payforgood(String Users, String goodname, String goodnumber) throws SQLException, ClassNotFoundException {
 		LoginDAO logindao = new LoginDAO();
 		
+		//deduct the balance of a user needing payment service
+		
+		System.out.println(goodnumber);
 		Goods good = getgoodBygoodname(goodname);
 		int onecost = Integer.valueOf(good.getValue()).intValue();
 		int money = logindao.getBalance(Users);
@@ -145,23 +308,11 @@ public class ShopDAO extends DBstart {
 
 		if(!logindao.setBalance(Users, String.valueOf(money))) return false;
 		
+		//update the number of goods in database
 		int rest = Integer.valueOf(good.getGoodsNum()).intValue() - number;
 		if(!setNumber(goodname, String.valueOf(rest))) return false;
 		
-		sql = "select * from statistic where key = ?";
-		ps = ct.prepareStatement(sql);
-		ps.setString(1, "income");
-		rs = ps.executeQuery();
 
-		if (rs.next()) {
-			String income = rs.getString("value");
-			int incomenum = Integer.valueOf(income).intValue() + number * onecost;
-			sql = "update statistic set value = ? where key = ?";
-			ps = ct.prepareStatement(sql);
-			ps.setString(1, String.valueOf(incomenum));
-			ps.setString(2, "income");
-			if (ps.executeUpdate() > 0) return true;
-		}
 		return false;
 	}
 }

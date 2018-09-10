@@ -11,6 +11,7 @@ import VC.common.CourseMessage;
 import VC.common.Goods;
 import VC.common.GoodsMessage;
 import VC.common.Message;
+import VC.server.dao.LoginDAO;
 import VC.server.dao.ShopDAO;
 import VC.server.vo.ShopSrv;
 
@@ -159,10 +160,17 @@ public class ShopSrvImpl implements ShopSrv {
 		oos.flush();
 	}
 	
-	public void getMyBalance(Message rcvmsg, Socket socket) {
+	public void getMyBalance(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
 		
+		LoginDAO logindao = new LoginDAO();
 		GoodsMessage sendmsg = new GoodsMessage();
 		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
+		String username = rmsg.getID();
+		String balance =String.valueOf(logindao.getBalance(username));
 		
+		sendmsg.setBalance(balance);
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(sendmsg);
+		oos.flush();
 	}
 }
