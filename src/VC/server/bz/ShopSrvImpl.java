@@ -113,19 +113,26 @@ public void delMygood(Message rcvmsg, Socket socket) throws SQLException, IOExce
 	}
 	
 //pay for a good in shopping cart and return the result of the operation
+
 public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 	
 	GoodsMessage sendmsg = new GoodsMessage();
-	String goodname = null;
 	String username = null;
-	String goodnumber = null;
-	boolean res = false;
+	boolean res = true;
 	GoodsMessage rmsg = (GoodsMessage) rcvmsg;
-	goodname = rmsg.getProductName();
-	goodnumber = rmsg.getGoodsNum();
+	System.out.println("goodnumber = " + rmsg.getGoodsNum());
 	username = rmsg.getID();
 	
-	res = shopdao.payforgoodincart(username, goodname, goodnumber);
+	
+	
+	List<Goods> Goodslist = new ArrayList<Goods>();
+	Goodslist = shopdao.GetMyshoppingcart(username);
+	System.out.println("number of list = " + Goodslist.size());
+	for(int i = 0; i < Goodslist.size(); i++) {
+		Goods gd = Goodslist.get(i);
+		res &= shopdao.payforgoodincart(username,gd.getProductName(), gd.getGoodsNum());
+	}
+	
 	
 	sendmsg.setRes(res);
 

@@ -13,6 +13,7 @@ public class Message implements java.io.Serializable{
 	private String type;
 	private boolean res;
 	
+	
 	public String getType() {
 		return type;
 	}

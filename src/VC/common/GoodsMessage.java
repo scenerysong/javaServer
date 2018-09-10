@@ -12,6 +12,7 @@ public class GoodsMessage extends Message{
 	private String value;
 	private String goodsID;
 	private String goodsNum;
+	private String balance;
 	
 	private List<Goods> Goodslist;
 	private List<String> GoodsName;
@@ -75,6 +76,14 @@ public class GoodsMessage extends Message{
 
 	public void setNum(List<String> num) {
 		Num = num;
+	}
+
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 	
 

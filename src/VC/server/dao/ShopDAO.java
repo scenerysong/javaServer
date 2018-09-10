@@ -48,13 +48,13 @@ public class ShopDAO extends DBstart {
 		rs = ps.executeQuery();
 
 		if (rs.next()) {
-			sql = "insert into BorrowedBook values (?, ?, ?, ?, ?)";
+			sql = "insert into shoppingcart (User, goodname, goodvalue, goodnumber, goodid) values (?, ?, ?, ?, ?)";
 			ps = ct.prepareStatement(sql);
-			ps.setString(1, rs.getString("goodid"));
-			ps.setString(2, User);
-			ps.setString(3, rs.getString("goodname"));
-			ps.setString(4, rs.getString("goodvalue"));
-			ps.setString(5, number);
+			ps.setString(5, rs.getString("goodid"));
+			ps.setString(1, User);
+			ps.setString(2, rs.getString("goodname"));
+			ps.setString(3, rs.getString("goodvalue"));
+			ps.setString(4, number);
 			if (ps.executeUpdate() > 0)
 				return true;
 			else
@@ -141,6 +141,8 @@ public class ShopDAO extends DBstart {
 		LoginDAO logindao = new LoginDAO();
 		
 		//deduct the balance of a user needing payment service
+		
+		System.out.println(goodnumber);
 		Goods good = getgoodBygoodname(goodname);
 		int onecost = Integer.valueOf(good.getValue()).intValue();
 		int money = logindao.getBalance(Users);
@@ -155,7 +157,7 @@ public class ShopDAO extends DBstart {
 		if(!setNumber(goodname, String.valueOf(rest))) return false;
 		
 		//update the profits of shop 
-		sql = "select * from statistic where key = ?";
+		/*sql = "select * from statistic where key = ?";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, "income");
 		rs = ps.executeQuery();
@@ -168,7 +170,7 @@ public class ShopDAO extends DBstart {
 			ps.setString(1, String.valueOf(incomenum));
 			ps.setString(2, "income");
 			if (ps.executeUpdate() > 0) return true;
-		}
+		}*/
 		return false;
 	}
 }
