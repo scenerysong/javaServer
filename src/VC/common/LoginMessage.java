@@ -1,10 +1,11 @@
 package VC.common;
 
+/**
+ * 用于登录的信息
+ */
 public class LoginMessage extends Message{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -7420984305071859572L;
 	private boolean loginstat;
 	private String passwd;

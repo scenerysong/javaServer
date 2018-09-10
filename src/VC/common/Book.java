@@ -1,11 +1,12 @@
 package VC.common;
 
+/**
+ * 书籍的属性
+ * 
+ * @author lin
+ */
 public class Book implements java.io.Serializable{
 	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2241529224304883586L;
 
 	private String bookID;

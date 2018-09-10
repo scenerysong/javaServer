@@ -1,13 +1,13 @@
 package VC.common;
 
+/**
+ * 信息的基础类 <br>
+ * 其余信息继承此类产生
+ * 
+ * @author song
+ */
 public class Message implements java.io.Serializable{
 	
-
-
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2467300089917028886L;
 	private String ID;
 	private String type;

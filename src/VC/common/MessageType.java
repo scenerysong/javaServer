@@ -1,5 +1,10 @@
 package VC.common;
 
+/**
+ * 
+ * @author song
+ *所有传递的消息命令字
+ */
 public interface MessageType {
 	// 消息类型分为三类：命令CMD---数据DAT---结果RST
 

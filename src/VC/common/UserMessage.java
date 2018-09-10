@@ -1,10 +1,11 @@
 package VC.common;
 
+/**
+ * 用于学生学籍模块的信息类型
+ */
 public class UserMessage extends Message{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 3811042105596867607L;
 	private String username;
 	private User user;

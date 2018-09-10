@@ -12,13 +12,17 @@ import VC.server.vo.LoginSrv;
 import VC.server.vo.MultiServer;
 import VC.server.vo.ServerSrv;
 
-public class MultiServerImpl implements ServerSrv, MultiServer {
+public class MultiServerImpl extends Thread implements MultiServer{
 
 	private ServerSocket serversocket = null;
 	private static final int SERVER_PORT = SocketConstant.SERVER_PORT;
 	private boolean closed = false;
-
+	private int iterTurns;
+	private int sckport;
+	private String curUser;
+	
 	public MultiServerImpl() {
+		this.setIterTurns(0);
 		try {
 			this.setServersocket(new ServerSocket(SERVER_PORT));
 		} catch (IOException e) {
@@ -48,16 +52,16 @@ public class MultiServerImpl implements ServerSrv, MultiServer {
 				e2.printStackTrace();
 			}
 			System.out.println(rsvsocket.getPort());
+			this.setSckport(rsvsocket.getPort());
+			this.setIterTurns(i);
 			Message rcvmsg = new Message();
 			ObjectInputStream ois = null;
-			
 			try {
 				ois = new ObjectInputStream(rsvsocket.getInputStream());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
 			try {
 				rcvmsg = (Message) ois.readObject();
 			} catch (ClassNotFoundException e) {
@@ -67,7 +71,7 @@ public class MultiServerImpl implements ServerSrv, MultiServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			this.setCurUser(rcvmsg.getID());
 			System.out.println(rcvmsg.getType());
 			
 			if (rcvmsg.getType().equals(MessageType.CMD_JUDGE_LOGIN)) {
@@ -142,5 +146,29 @@ public class MultiServerImpl implements ServerSrv, MultiServer {
 	@Override
 	public void setClosed(boolean closed) {
 		this.closed = closed;
+	}
+
+	public int getIterTurns() {
+		return iterTurns;
+	}
+
+	public void setIterTurns(int iterTurns) {
+		this.iterTurns = iterTurns;
+	}
+
+	public int getSckport() {
+		return sckport;
+	}
+
+	public void setSckport(int sckport) {
+		this.sckport = sckport;
+	}
+
+	public String getCurUser() {
+		return curUser;
+	}
+
+	public void setCurUser(String curUser) {
+		this.curUser = curUser;
 	}
 }

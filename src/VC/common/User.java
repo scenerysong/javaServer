@@ -1,10 +1,11 @@
 package VC.common;
 
+/**
+ * 学生学籍属性,包括名称,性别,民族,生日
+ */
 public class User implements java.io.Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 5869223962626495685L;
 	private String username;
 	private String personname;

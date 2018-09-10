@@ -2,11 +2,13 @@ package VC.common;
 
 import java.util.List;
 
+/**
+ * 设置、获取课程的属性
+ * 
+ * @author lin
+ */
 public class CourseMessage  extends Message{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -3803474184360625783L;
 	private String courseName;
 	private String score;
@@ -15,7 +17,6 @@ public class CourseMessage  extends Message{
 	private String courseRoom;
 	private String courseNum;
 	private String courseTeacher;
-	
 	private Course course;
 	private List<Course> courselist;
     public CourseMessage(){
@@ -84,5 +85,4 @@ public class CourseMessage  extends Message{
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-
 }

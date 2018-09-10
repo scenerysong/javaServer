@@ -1,10 +1,11 @@
 package VC.common;
 
+/**
+ * 商品的属性
+ * @author lin
+ */
 public class Goods implements java.io.Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6836144424744782242L;
 	private String productName;
 	private String value;
@@ -50,6 +51,4 @@ public class Goods implements java.io.Serializable{
 		return "Goods [productName=" + productName + ",value=" + value
 				 + ", goodsID=" + goodsID+ ", goodsNum=" + goodsNum;
 	}
-	
-
 }

@@ -2,16 +2,19 @@ package VC.common;
 
 import java.util.List;
 
+/**
+ * 
+ * @author song
+ *商店模块所使用的信息
+ */
 public class GoodsMessage extends Message{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4636492175363052477L;
+	private static final long serialVersionUID = 1023509898510044636L;
 	private String productName;
 	private String value;
 	private String goodsID;
 	private String goodsNum;
+	private String balance;
 	
 	private List<Goods> Goodslist;
 	private List<String> GoodsName;
@@ -75,6 +78,14 @@ public class GoodsMessage extends Message{
 
 	public void setNum(List<String> num) {
 		Num = num;
+	}
+
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 	
 
