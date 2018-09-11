@@ -11,7 +11,11 @@ import VC.common.SocketConstant;
 import VC.server.vo.LoginSrv;
 import VC.server.vo.MultiServer;
 import VC.server.vo.ServerSrv;
-
+/**
+ * 
+ * @author xgw
+ *服务器端主线程部分
+ */
 public class MultiServerImpl extends Thread implements MultiServer{
 
 	private ServerSocket serversocket = null;

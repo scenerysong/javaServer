@@ -14,6 +14,11 @@ import VC.server.vo.ServerThreadSrv;
 import VC.server.vo.ShopSrv;
 import VC.server.vo.StuSrv;
 
+/**
+ * 
+ * @author song
+ *服务器的子线程
+ */
 public class ServerThread implements Runnable, ServerThreadSrv {
 
 	private Socket client;

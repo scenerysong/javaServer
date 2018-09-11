@@ -1,5 +1,9 @@
 package VC.server.bz;
 
+/**
+ * 服务器端GUI设计
+ *
+ */
 import javafx.application.Application;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;

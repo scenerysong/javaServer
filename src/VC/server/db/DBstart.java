@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 
+/**
+ * 
+ * @author xgw
+ *数据库的连接,DAO操作调用此类进行数据库的连接即可
+ */
 public class DBstart {
 	
 	private static final String HXTT_ACCESS_JDBC_DRIVER = "com.hxtt.sql.access.AccessDriver";
