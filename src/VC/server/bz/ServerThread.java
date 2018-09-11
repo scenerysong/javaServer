@@ -145,7 +145,7 @@ public class ServerThread implements Runnable, ServerThreadSrv {
 
 				ShopSrv shopsrv = new ShopSrvImpl();
 				try {
-					shopsrv.delMygood(rcvmsg, client);
+					shopsrv.payforMygood(rcvmsg, client);
 				} catch (ClassNotFoundException | SQLException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

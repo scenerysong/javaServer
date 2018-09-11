@@ -39,7 +39,7 @@ public class StuDAO extends DBstart{
 	 * StuDAO studao = new StuDAO();
 	 * User infofwls = studao.getUserInf(user);
 	 * 
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @return the information of Users
@@ -80,7 +80,7 @@ public class StuDAO extends DBstart{
 	 * StuDAO studao = new StuDAO();
 	 * studao.modifyInf(user, inf);
 	 * 
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @param inf

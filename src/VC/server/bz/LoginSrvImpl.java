@@ -1,5 +1,7 @@
 package VC.server.bz;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -35,6 +37,7 @@ public class LoginSrvImpl implements LoginSrv {
 	@Override
 	public boolean judgeLogin(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
 		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		boolean flag = false;
 		//LoginDAO logindao = new LoginDAO();
 		LoginMessage loginmsg = new LoginMessage();
@@ -44,10 +47,10 @@ public class LoginSrvImpl implements LoginSrv {
 		sendmsg = loginmsg;
 		sendmsg.setLoginstat(false);
 		
-		
 		if(loginmsg.getPasswd().equals(logindao.getPasswd(loginmsg.getID()))) {
 			sendmsg.setLoginstat(true);
 			flag = true;
+			ServerStarter.adduser("登陆时间：  " + df.format(new Date()) + "  用户名： " +  rcvmsg.getID());
 		}
 		
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());

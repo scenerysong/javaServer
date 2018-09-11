@@ -142,32 +142,31 @@ public class ShopSrvImpl implements ShopSrv {
 	public void payforMygood(Message rcvmsg, Socket socket) throws SQLException, IOException, ClassNotFoundException {
 
 		GoodsMessage sendmsg = new GoodsMessage();
-		String goodname = null;
 		String username = null;
-		String goodnumber = null;
-		boolean res = false;
+		boolean res = true;
 		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
-		goodname = rmsg.getProductName();
-		goodnumber = rmsg.getGoodsNum();
+		System.out.println("goodnumber = " + rmsg.getGoodsNum());
 		username = rmsg.getID();
-
-		res = shopdao.payforgoodincart(username, goodname, goodnumber);
-
+		List<Goods> Goodslist = new ArrayList<Goods>();
+		Goodslist = shopdao.GetMyshoppingcart(username);
+		System.out.println("number of list = " + Goodslist.size());
+		for (int i = 0; i < Goodslist.size(); i++) {
+			Goods gd = Goodslist.get(i);
+			res &= shopdao.payforgoodincart(username, gd.getProductName(), gd.getGoodsNum());
+		}
 		sendmsg.setRes(res);
-
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(sendmsg);
 		oos.flush();
 	}
-	
 	public void getMyBalance(Message rcvmsg, Socket socket) throws SQLException, ClassNotFoundException, IOException {
-		
+
 		LoginDAO logindao = new LoginDAO();
 		GoodsMessage sendmsg = new GoodsMessage();
 		GoodsMessage rmsg = (GoodsMessage) rcvmsg;
 		String username = rmsg.getID();
-		String balance =String.valueOf(logindao.getBalance(username));
-		
+		String balance = String.valueOf(logindao.getBalance(username));
+
 		sendmsg.setBalance(balance);
 		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 		oos.writeObject(sendmsg);

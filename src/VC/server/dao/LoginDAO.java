@@ -34,7 +34,7 @@ public class LoginDAO extends DBstart{
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * flag = login.getPasswd(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param usrname
 	 * @return the password of user given
@@ -74,7 +74,7 @@ public class LoginDAO extends DBstart{
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * flag = login.addUser(User, passwd, usertype);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param username
 	 * @param passwd
@@ -110,7 +110,7 @@ public class LoginDAO extends DBstart{
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * flag = login.delUser(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param username
 	 * @return the result of operation
@@ -137,7 +137,7 @@ public class LoginDAO extends DBstart{
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * flag = login.JudgeUserType(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param username
 	 * @return the result of operation
@@ -162,14 +162,14 @@ public class LoginDAO extends DBstart{
 	 * 
 	 * get the balance of a user in database
 	 * 
-	 * <p><pre>{@code
+	 * <pre>{@code
 	 * show how to use this method
 	 * 
 	 * String User = "wls";
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * int balance = login.getBalance(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param username
 	 * @return the balance of a user
@@ -195,7 +195,7 @@ public class LoginDAO extends DBstart{
 	 * LoginDAO logindao = new LoginDAO();
 	 * 
 	 * int balance = login.getBalance(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param username
 	 * @param balance

@@ -37,7 +37,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * goods = shopdao.getAllGoods();
-	 * }
+	 * }</pre>
 	 * 
 	 * @return the information of all goods in database
 	 * @throws SQLException
@@ -77,7 +77,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.addtoshoppingcart(User, goodname, number);
-	 * } 
+	 * } </pre>
 	 * 
 	 * @param User
 	 * @param goodname
@@ -119,7 +119,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * Gds = shopdao.GetMyshoppingcart(User);
-	 * } 
+	 * } </pre>
 	 * 
 	 * @param Users
 	 * @return the goods in shopping cart
@@ -159,7 +159,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.deletegoodfromcart(User, goodname);
-	 * } 
+	 * } </pre>
 	 * 
 	 * @param Users
 	 * @param goodname
@@ -190,7 +190,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.deletegoodfromcart(User, goodname, goodnumber);
-	 * } 
+	 * } </pre>
 	 * 
 	 * @param Users
 	 * @param goodname
@@ -219,7 +219,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.getgoodBygoodname(goodname);
-	 * } 
+	 * } </pre>
 	 * 
 	 * @param goodname
 	 * @return the information of good
@@ -254,7 +254,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.setNumber(goodname, goodnumber);
-	 * }
+	 * }</pre>
 	 *  
 	 * @param goodname
 	 * @param number
@@ -284,7 +284,7 @@ public class ShopDAO extends DBstart {
 	 * ShopDAO shopdao = new ShopDAO();
 	 * 
 	 * flag = shopdao.payforgood(User, goodname, goodnumber);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @param goodname

@@ -31,14 +31,14 @@ public class CourseDAO extends DBstart{
 	 * 
 	 * get all of the course in the database
 	 * 
-	 * <p><pre>{@code
+	 * <pre>{@code
 	 * show how to use this method
 	 * 
 	 * CourseDAO coursedao = new CourseDAO();
 	 * 
 	 * List<Course> cs = new ArrayList<Course>();
 	 * cs = coursedao.getAllCourse();
-	 * }
+	 * }</pre>
 	 * 
 	 * @return all courses in database
 	 * @throws SQLException
@@ -70,7 +70,7 @@ public class CourseDAO extends DBstart{
 	 * 
 	 * add a course for a user
 	 * 
-	 * <p><pre>{@code
+	 * <pre>{@code
 	 * show how to use this method
 	 * 
 	 * String User = "wls";
@@ -78,7 +78,7 @@ public class CourseDAO extends DBstart{
 	 * CourseDAO coursedao = new CourseDAO();
 	 * 
 	 * flag = coursedao.AddCourse(User, coursename);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @param coursename
@@ -125,7 +125,7 @@ public class CourseDAO extends DBstart{
 	 * 
 	 * List<Course> cs = new ArrayList<Course>();
 	 * cs = coursedao.getAllMyCourse(User);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @return all of the courses the user has chosen
@@ -165,7 +165,7 @@ public class CourseDAO extends DBstart{
 	 * String coursesname = "Historty";
 	 * 
 	 * flag = coursedao.DelCourse(User, coursesname);
-	 * }
+	 * }</pre>
 	 * 
 	 * @param Users
 	 * @param coursename

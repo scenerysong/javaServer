@@ -28,7 +28,7 @@ public class ServerStarter extends Application{
 	private Button sto = new Button("关闭服务器");
 	private Stage start = new Stage();
 	ListView<String> list = new ListView<String>();
-	ObservableList<String> items =FXCollections.observableArrayList ();
+	static ObservableList<String> items =FXCollections.observableArrayList ();
 
 	MultiServerImpl multiserver;
 	
@@ -73,10 +73,14 @@ public class ServerStarter extends Application{
 		list.setItems(items);
 		list.refresh();
 //		items.remove(1);
-		items.add(size, "你怕skr啥子");
+		items.add(size, "用户登录情况");
 //		items.clear();
 
 		return x;
+	}
+	
+	public static void adduser(String username) {
+		items.add(items.size(), username);
 	}
 	
 	public HBox setButton() {
