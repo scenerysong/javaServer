@@ -49,7 +49,7 @@ public class ServerStarter extends Application{
 		
 		sto.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent e) {
-				//hanshu
+				start.close();
 			}
 			
 		});
