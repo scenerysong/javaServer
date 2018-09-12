@@ -10,9 +10,8 @@ package VC.server.dao;
  * 
  * @version 1.0
 */
-
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import java.sql.SQLException;
-
 import VC.common.User;
 import VC.server.db.DBstart;
 
