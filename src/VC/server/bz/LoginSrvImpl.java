@@ -1,7 +1,7 @@
 package VC.server.bz;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.jasypt.util.text.BasicTextEncryptor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,8 +52,7 @@ public class LoginSrvImpl implements LoginSrv {
 		sendmsg.setLoginstat(false);
 		
 		BasicPasswordEncryptor encryptor = new BasicPasswordEncryptor();
-		BasicTextEncryptor encryptorText = new BasicTextEncryptor();
-		if(encryptor.checkPassword(encryptorText.decrypt(loginmsg.getPasswd()), logindao.getPasswd(loginmsg.getID()))) {
+		if(encryptor.checkPassword(loginmsg.getPasswd(), logindao.getPasswd(loginmsg.getID()))) {
 			sendmsg.setLoginstat(true);
 			flag = true;
 			ServerStarter.adduser("登陆时间：  " + df.format(new Date()) + "  用户名： " +  rcvmsg.getID());
@@ -77,12 +76,11 @@ public class LoginSrvImpl implements LoginSrv {
 		LoginMessage rmsg = (LoginMessage) rcvmsg;
 		
 		String a = rmsg.getID();
-		
-		BasicTextEncryptor encryptorText = new BasicTextEncryptor();
+
 		String ifsuperuser = "user";
-		if(encryptorText.decrypt(rmsg.getAdmincode()).equals("2333"))
+		if(rmsg.getAdmincode().equals("2333"))
 			ifsuperuser = "superuser";
-		String b = encryptorText.decrypt(rmsg.getPasswd());
+		String b = rmsg.getPasswd();
 		System.out.println("this is srv step");
 		System.out.println(rmsg.getID());
 		System.out.println(rmsg.getPasswd());
