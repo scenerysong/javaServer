@@ -83,11 +83,15 @@ public class LoginDAO extends DBstart{
 	 * @throws SQLException
 	 */
 	public boolean addUser(String username, String passwd, String usertype) throws SQLException {
+		System.out.println("this is dao part1 and the username is " + username);
 		sql = "select * from login where usrname = ?";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, username);
-		if(rs.next()) return false;
+		rs = ps.executeQuery();
+		if(rs.equals(null)) 
+			return false;
 		
+		System.out.println("this is dao part2");
 		sql = "insert into login (usrname, passwd, balance, Credit, usertype) values (?, ?, ?, ?, ?)";
 		ps = ct.prepareStatement(sql);
 		ps.setString(1, username);

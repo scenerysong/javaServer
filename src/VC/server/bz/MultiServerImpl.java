@@ -96,6 +96,7 @@ public class MultiServerImpl extends Thread implements MultiServer{
 				LoginSrv loginsrv = new LoginSrvImpl();
 				
 				try {
+					System.out.println("this is in the regis step");
 					loginsrv.addUser(rcvmsg, rsvsocket);
 				} catch (SQLException | IOException e) {
 					// TODO Auto-generated catch block
