@@ -76,9 +76,10 @@ public class LoginSrvImpl implements LoginSrv {
 		LoginMessage rmsg = (LoginMessage) rcvmsg;
 		
 		String a = rmsg.getID();
+		String decrypted = rmsg.getAdmincode();
 
 		String ifsuperuser = "user";
-		if(rmsg.getAdmincode().equals("2333"))
+		if(decrypted.equals("2333"))
 			ifsuperuser = "superuser";
 		String b = rmsg.getPasswd();
 		System.out.println("this is srv step");
